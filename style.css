@@ -660,3 +660,85 @@ footer strong { color: var(--pink-300); }
   .career-quote { font-size: 5rem; }
   section { padding: 4rem 1.2rem; }
 }
+/* Giao diện chậu hoa và hiệu ứng nở */
+#tulip-fixed-container {
+  position: fixed;
+  bottom: 10px; /* Cách đáy 10px */
+  right: 10px;  /* Cách phải 10px */
+  width: 80px;
+  height: 150px;
+  z-index: 999; /* Luôn nằm trên các thành phần khác */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none; /* Không che mất các nút bấm phía dưới nếu có */
+}
+
+/* Vẽ Chậu hoa */
+.flower-pot {
+  width: 50px;
+  height: 40px;
+  background-color: #a1887f; /* Màu nâu đất */
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  bottom: 0;
+  box-shadow: inset 0 -5px 5px rgba(0,0,0,0.2);
+}
+
+/* Vẽ Thân hoa */
+.stem {
+  width: 6px;
+  height: 80px;
+  background-color: #81c784; /* Màu xanh lá */
+  border-radius: 10px;
+  position: absolute;
+  bottom: 35px; /* Nằm trên chậu */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Bông hoa tu-líp */
+.tulip-flower {
+  position: absolute;
+  bottom: 110px; /* Nằm trên thân */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 45px;
+  z-index: 2;
+}
+
+/* Định dạng chung cánh hoa */
+.petal {
+  position: absolute;
+  width: 25px;
+  height: 40px;
+  background-color: #ff8a80; /* Màu hồng đỏ tu-líp */
+  border-radius: 50% 50% 10% 10% / 60% 60% 40% 40%; /* Bo tròn tạo hình cánh */
+  bottom: 0;
+  transform-origin: bottom center; /* Điểm xoay nằm ở gốc cánh hoa */
+  transition: transform 0.1s linear; /* Mượt mà khi xoay */
+}
+
+/* Cánh trái */
+.left-petal {
+  left: 0;
+  transform: rotate(-10deg); /* Trạng thái ban đầu hơi ngậm */
+}
+
+/* Cánh phải */
+.right-petal {
+  right: 0;
+  transform: rotate(10deg); /* Trạng thái ban đầu hơi ngậm */
+}
+
+/* Cánh giữa (cánh ngậm) */
+.central-petal {
+  width: 20px;
+  height: 35px;
+  background-color: #ff5252; /* Màu đậm hơn chút */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3; /* Nằm trên cùng */
+}
