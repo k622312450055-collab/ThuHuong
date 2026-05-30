@@ -421,5 +421,179 @@
   </footer>
 
   <script src="script.js"></script>
+<div id="mini-game-container">
+  <button id="open-game-btn" title="Góc Giải Trí">🎮</button>
+
+  <div id="game-modal" class="hidden">
+    <div class="game-content">
+      <button id="close-game-btn">&times;</button>
+      <h2 style="margin-bottom: 10px; color: #ff6b81; font-family: 'Playfair Display', serif;">Candy Crush Lite</h2>
+      <div style="margin-bottom: 15px; font-weight: bold; color: #333;">Score: <span id="game-score">0</span></div>
+      <div id="game-board"></div>
+      <p style="margin-top: 15px; font-size: 12px; color: #666;">Kéo thả kẹo để tạo hàng 3 nhé!</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Giao diện cho game */
+  #open-game-btn {
+    position: fixed; bottom: 30px; left: 30px;
+    background: #ff6b81; color: white; border: none;
+    border-radius: 50%; width: 55px; height: 55px;
+    font-size: 28px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+    z-index: 1000; transition: transform 0.3s;
+  }
+  #open-game-btn:hover { transform: scale(1.1); }
+  #game-modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center;
+    z-index: 1001; opacity: 1; visibility: visible; transition: 0.3s ease;
+  }
+  #game-modal.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .game-content {
+    background: #fff; padding: 25px; border-radius: 20px;
+    text-align: center; position: relative; width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  #close-game-btn {
+    position: absolute; top: 15px; right: 20px; font-size: 28px;
+    background: none; border: none; cursor: pointer; color: #aaa; transition: color 0.2s;
+  }
+  #close-game-btn:hover { color: #ff6b81; }
+  #game-board {
+    width: 320px; height: 320px; background: #f0f0f0; border-radius: 10px;
+    display: flex; flex-wrap: wrap; margin: 0 auto; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  }
+  #game-board div {
+    width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;
+    font-size: 26px; cursor: grab; user-select: none;
+  }
+  #game-board div:active { cursor: grabbing; }
+</style>
+
+<script>
+  // Logic xử lý Candy Crush (Match-3)
+  document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.getElementById('open-game-btn');
+    const closeBtn = document.getElementById('close-game-btn');
+    const modal = document.getElementById('game-modal');
+    const grid = document.getElementById('game-board');
+    const scoreDisplay = document.getElementById('game-score');
+    const width = 8;
+    const squares = [];
+    let score = 0;
+    // Sử dụng emoji thay cho ảnh để web load nhanh, không cần up thêm file
+    const candies = ['🍬', '🍭', '🍫', '🍩', '🍪', '🧁'];
+
+    openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+    // Tạo bảng 8x8
+    function createBoard() {
+      for (let i = 0; i < width * width; i++) {
+        const square = document.createElement('div');
+        square.setAttribute('draggable', true);
+        square.setAttribute('id', i);
+        let randomCandy = Math.floor(Math.random() * candies.length);
+        square.innerHTML = candies[randomCandy];
+        grid.appendChild(square);
+        squares.push(square);
+      }
+    }
+    createBoard();
+
+    let colorBeingDragged, colorBeingReplaced, squareIdBeingDragged, squareIdBeingReplaced;
+
+    squares.forEach(square => square.addEventListener('dragstart', dragStart));
+    squares.forEach(square => square.addEventListener('dragend', dragEnd));
+    squares.forEach(square => square.addEventListener('dragover', dragOver));
+    squares.forEach(square => square.addEventListener('dragenter', dragEnter));
+    squares.forEach(square => square.addEventListener('dragleave', dragLeave));
+    squares.forEach(square => square.addEventListener('drop', dragDrop));
+
+    function dragStart() {
+      colorBeingDragged = this.innerHTML;
+      squareIdBeingDragged = parseInt(this.id);
+    }
+    function dragOver(e) { e.preventDefault(); }
+    function dragEnter(e) { e.preventDefault(); }
+    function dragLeave() {}
+    function dragDrop() {
+      colorBeingReplaced = this.innerHTML;
+      squareIdBeingReplaced = parseInt(this.id);
+      this.innerHTML = colorBeingDragged;
+      squares[squareIdBeingDragged].innerHTML = colorBeingReplaced;
+    }
+    function dragEnd() {
+      let validMoves = [
+        squareIdBeingDragged - 1, squareIdBeingDragged - width,
+        squareIdBeingDragged + 1, squareIdBeingDragged + width
+      ];
+      let validMove = validMoves.includes(squareIdBeingReplaced);
+      
+      if (squareIdBeingReplaced && validMove) {
+        squareIdBeingReplaced = null;
+      } else if (squareIdBeingReplaced && !validMove) {
+        squares[squareIdBeingReplaced].innerHTML = colorBeingReplaced;
+        squares[squareIdBeingDragged].innerHTML = colorBeingDragged;
+      } else {
+        squares[squareIdBeingDragged].innerHTML = colorBeingDragged;
+      }
+    }
+
+    // Làm kẹo rơi xuống
+    function moveDown() {
+      for (let i = 0; i < 55; i++) {
+        if (squares[i + width].innerHTML === '') {
+          squares[i + width].innerHTML = squares[i].innerHTML;
+          squares[i].innerHTML = '';
+        }
+        const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
+        const isFirstRow = firstRow.includes(i);
+        if (isFirstRow && squares[i].innerHTML === '') {
+          let randomCandy = Math.floor(Math.random() * candies.length);
+          squares[i].innerHTML = candies[randomCandy];
+        }
+      }
+    }
+
+    // Kiểm tra hàng ngang
+    function checkRowForThree() {
+      for (let i = 0; i < 61; i++) {
+        let rowOfThree = [i, i+1, i+2];
+        let decidedColor = squares[i].innerHTML;
+        const isBlank = squares[i].innerHTML === '';
+        const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
+        if (notValid.includes(i)) continue;
+        if (rowOfThree.every(index => squares[index].innerHTML === decidedColor && !isBlank)) {
+          score += 3;
+          scoreDisplay.innerHTML = score;
+          rowOfThree.forEach(index => { squares[index].innerHTML = ''; });
+        }
+      }
+    }
+
+    // Kiểm tra hàng dọc
+    function checkColumnForThree() {
+      for (let i = 0; i < 47; i++) {
+        let columnOfThree = [i, i+width, i+width*2];
+        let decidedColor = squares[i].innerHTML;
+        const isBlank = squares[i].innerHTML === '';
+        if (columnOfThree.every(index => squares[index].innerHTML === decidedColor && !isBlank)) {
+          score += 3;
+          scoreDisplay.innerHTML = score;
+          columnOfThree.forEach(index => { squares[index].innerHTML = ''; });
+        }
+      }
+    }
+
+    // Vòng lặp game chạy liên tục 0.1s/lần
+    window.setInterval(function() {
+      checkRowForThree();
+      checkColumnForThree();
+      moveDown();
+    }, 100);
+  });
+</script>
 </body>
 </html>
