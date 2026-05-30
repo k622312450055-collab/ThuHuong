@@ -674,97 +674,120 @@ footer strong { color: var(--pink-300); }
   justify-content: flex-end;
   align-items: center;
 }
+/* --- CHẬU HOA TULIP 3D THEO DÒNG CUỘN --- */
+
+/* Vùng chứa cố định */
+#tulip-fixed-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px; /* Kích thước vừa phải, không quá che nội dung */
+  height: 200px;
+  z-index: 999; /* Luôn nằm trên các thành phần khác */
+  pointer-events: none; /* Không che mất các nút bấm phía dưới nếu có */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
 
 /* --- CHẬU ĐẤT NUNG 3D --- */
 .pot {
   position: relative;
   z-index: 10; /* Nằm đè lên cây để che lúc cây chưa mọc */
 }
+/* Viền miệng chậu */
 .pot-lip {
   width: 70px;
   height: 14px;
   border-radius: 6px;
-  background: linear-gradient(to right, #e4a27a, #c0784d, #9d5a34);
+  background: linear-gradient(to right, #e4a27a, #c0784d, #9d5a34); /* Hiệu ứng ánh sáng đất nung */
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   margin: 0 auto;
 }
+/* Thân chậu */
 .pot-body {
   width: 56px;
   height: 50px;
   background: linear-gradient(to right, #d8895b, #b4683c, #8b4a26);
   border-radius: 0 0 15px 15px;
   margin: 0 auto;
-  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3);
+  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3); /* Bóng đổ bên trong */
 }
 
-/* --- CÂY HOA --- */
+/* --- CÂY HOA (Phần mọc lên) --- */
 .plant-group {
   position: absolute;
-  bottom: 60px; /* Bắt đầu từ miệng chậu */
+  bottom: 60px; /* Bắt đầu mọc từ miệng chậu */
   left: 50%;
   transform: translateX(-50%);
-  z-index: 5;
+  z-index: 5; /* Nằm sau chậu */
   width: 100%;
-  height: 140px;
+  height: 140px; /* Chiều cao tối đa khi nở rộ */
 }
 
-/* Thân cây */
+/* Thân cây mập mạp 3D */
 .stem {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%) scaleY(0); /* Bắt đầu với chiều cao = 0 */
-  transform-origin: bottom;
+  transform-origin: bottom; /* Mọc từ gốc */
   width: 8px;
   height: 80px;
-  background: linear-gradient(to right, #9bd54d, #72a829);
+  background: linear-gradient(to right, #9bd54d, #72a829); /* Màu xanh 3D */
   border-radius: 4px;
+  transition: transform 0.1s linear; /* Chuyển động mượt mà */
 }
 
-/* Lá cây */
+/* Lá cây 3D (Mập mạp) */
 .leaf {
   position: absolute;
   width: 30px;
   height: 60px;
-  background: linear-gradient(to right, #8ccb3e, #629c21);
-  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.3);
+  background: linear-gradient(to right, #8ccb3e, #629c21); /* Màu xanh mập mạp */
+  box-shadow: inset 2px 2px 5px rgba(255,255,255,0.3); /* Ánh sáng mặt lá */
   bottom: 10px;
-  transform: scale(0); /* Ẩn lúc đầu */
+  transform: scale(0); /* Ban đầu ẩn */
+  transition: transform 0.1s linear;
 }
 .leaf-left {
   left: -5px;
-  border-radius: 100% 0 100% 0; /* Bo góc tạo hình lá */
-  transform-origin: bottom right;
+  border-radius: 100% 0 100% 0; /* Bo góc đặc biệt tạo hình lá giống ảnh */
+  transform-origin: bottom right; /* Xoay từ gốc bên phải */
 }
 .leaf-right {
   right: -5px;
   border-radius: 0 100% 0 100%;
-  transform-origin: bottom left;
+  transform-origin: bottom left; /* Xoay từ gốc bên trái */
 }
 
-/* Nụ / Bông hoa */
+/* Nụ hoa / Đầu hoa */
 .flower-head {
   position: absolute;
   bottom: 75px; /* Đỉnh của thân cây */
   left: 50%;
-  transform: translateX(-50%) scale(0); /* Ẩn lúc đầu */
+  transform: translateX(-50%) scale(0); /* Ban đầu ẩn */
   width: 50px;
   height: 55px;
-  transform-origin: bottom center;
+  transform-origin: bottom center; /* Nụ nhú từ đỉnh thân */
+  z-index: 6; /* Nằm trước lá */
+  transition: transform 0.1s linear;
 }
 
-/* Các cánh hoa 3D */
+/* Các cánh hoa tu-líp 3D */
 .petal {
   position: absolute;
   bottom: 0;
-  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%; /* Bo hình cánh hoa */
   transform-origin: bottom center;
+  transition: transform 0.1s linear;
 }
-/* Cánh giữa (Nụ bên trong) */
+/* Cánh giữa (Cánh nụ bên trong) */
 .petal-center {
   width: 34px;
   height: 50px;
-  background: linear-gradient(to bottom, #ff7eb3, #e8397a);
+  background: linear-gradient(to bottom, #ff7eb3, #e8397a); /* Màu hồng đậm 3D */
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -773,17 +796,17 @@ footer strong { color: var(--pink-300); }
 .petal-left {
   width: 32px;
   height: 55px;
-  background: linear-gradient(to right, #ff94c2, #f54a8f);
+  background: linear-gradient(to right, #ff94c2, #f54a8f); /* Màu hồng tu-líp 3D */
   left: 0;
-  box-shadow: inset -3px -3px 5px rgba(0,0,0,0.15);
+  box-shadow: inset -3px -3px 5px rgba(0,0,0,0.15); /* Bóng đổ tạo chiều sâu */
   z-index: 2;
 }
 /* Cánh ngoài bên phải */
 .petal-right {
   width: 32px;
   height: 55px;
-  background: linear-gradient(to left, #ff94c2, #f54a8f);
+  background: linear-gradient(to left, #ff94c2, #f54a8f); /* Đối xứng */
   right: 0;
-  box-shadow: inset 3px -3px 5px rgba(0,0,0,0.15);
+  box-shadow: inset 3px -3px 5px rgba(0,0,0,0.15); /* Đối xứng bóng */
   z-index: 2;
 }
