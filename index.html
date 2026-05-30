@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="vi">  
+<html lang="en">  
 <head> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyễn Thu Hương – Portfolio</title>
-  <meta name="description" content="Portfolio cá nhân của Nguyễn Thu Hương – Sinh viên Kinh tế Quốc tế tại Đại học Ngoại Thương, đam mê kinh doanh, tài chính và hợp tác quốc tế." />
+  <title>Nguyen Thu Huong – Portfolio</title>
+  <meta name="description" content="Personal Portfolio of Nguyen Thu Huong – International Economics Student at Foreign Trade University, passionate about business, finance, and international relations." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -12,19 +12,17 @@
 </head>
 <body>
 
-  <!-- Canvas for butterflies & petals -->
   <canvas id="bgCanvas"></canvas>
 
-  <!-- Navigation -->
   <nav id="navbar">
     <div class="nav-inner">
-      <a class="nav-logo" href="#hero">Thu Hương</a>
+      <a class="nav-logo" href="#hero">Thu Huong</a>
       <ul class="nav-links">
-        <li><a href="#about">Về tôi</a></li>
-        <li><a href="#education">Học vấn</a></li>
-        <li><a href="#leadership">Hoạt động</a></li>
-        <li><a href="#skills">Kỹ năng</a></li>
-        <li><a href="#contact">Liên hệ</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#leadership">Activities</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -32,102 +30,98 @@
     </div>
   </nav>
 
-  <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
-      <li><a href="#about" onclick="closeMobile()">Về tôi</a></li>
-      <li><a href="#education" onclick="closeMobile()">Học vấn</a></li>
-      <li><a href="#leadership" onclick="closeMobile()">Hoạt động</a></li>
-      <li><a href="#skills" onclick="closeMobile()">Kỹ năng</a></li>
-      <li><a href="#contact" onclick="closeMobile()">Liên hệ</a></li>
+      <li><a href="#about" onclick="closeMobile()">About</a></li>
+      <li><a href="#education" onclick="closeMobile()">Education</a></li>
+      <li><a href="#leadership" onclick="closeMobile()">Activities</a></li>
+      <li><a href="#skills" onclick="closeMobile()">Skills</a></li>
+      <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
     </ul>
   </div>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-content">
       <div class="hero-photo-wrap">
-        <img src="photo.jpg" alt="Nguyễn Thu Hương" class="hero-photo" id="heroPhoto" onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex';" />
+        <img src="photo.jpg" alt="Nguyen Thu Huong" class="hero-photo" id="heroPhoto" onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex';" />
         <div class="hero-initials" id="heroInitials">NTH</div>
         <div class="hero-photo-ring"></div>
         <div class="hero-photo-ring ring2"></div>
       </div>
       <div class="hero-text">
-        <p class="hero-greeting">Xin chào, tôi là</p>
-        <h1 class="hero-name">Nguyễn Thu Hương</h1>
+        <p class="hero-greeting">Hello, I am</p>
+        <h1 class="hero-name">Nguyen Thu Huong</h1>
         <p class="hero-role">International Economics Student <span class="dot">·</span> External Relations <span class="dot">·</span> Future Finance Professional</p>
         <p class="hero-tagline">"Growth comes from continuous learning, meaningful experiences, and the courage to take on new challenges."</p>
         <div class="hero-cta">
-          <a href="#about" class="btn-primary" id="btn-explore">Khám phá</a>
-          <a href="#contact" class="btn-ghost" id="btn-contact">Liên hệ tôi</a>
+          <a href="#about" class="btn-primary" id="btn-explore">Explore</a>
+          <a href="#contact" class="btn-ghost" id="btn-contact">Contact Me</a>
         </div>
         <div class="hero-badges">
           <span class="badge">🎓 FTU</span>
           <span class="badge">🌐 IELTS 7.0</span>
-          <span class="badge">📌 Hà Nội</span>
+          <span class="badge">📌 Hanoi</span>
         </div>
       </div>
     </div>
     <div class="scroll-hint">
-      <span>Cuộn xuống</span>
+      <span>Scroll Down</span>
       <div class="scroll-arrow"></div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
-      <div class="section-label">01 — Về Tôi</div>
-      <h2 class="section-title">Giới Thiệu Bản Thân</h2>
+      <div class="section-label">01 — About Me</div>
+      <h2 class="section-title">Biography</h2>
       <div class="about-grid">
         <div class="about-left">
           <p class="about-bio">
-            Tôi là <strong>Nguyễn Thu Hương</strong>, sinh viên năm ba Chương trình Chất lượng cao ngành Kinh tế Quốc tế tại Đại học Ngoại Thương (FTU). Tôi có niềm đam mê mạnh mẽ với kinh tế, kinh doanh quốc tế và tài chính — đặc biệt là phát triển kinh doanh, quan hệ đối tác chiến lược và phát triển bền vững.
+            I am <strong>Nguyen Thu Huong</strong>, a third-year student in the High-Quality Program of International Economics at Foreign Trade University (FTU). I have a strong passion for economics, international business, and finance — particularly in business development, strategic partnerships, and sustainable growth.
           </p>
           <p class="about-bio">
-            Thông qua các vai trò lãnh đạo trong tổ chức sinh viên và nhiều năm kinh nghiệm giảng dạy, tôi đã phát triển kỹ năng giao tiếp, làm việc nhóm, giải quyết vấn đề và tổ chức sự kiện.
+            Through leadership roles in student organizations and over three years of teaching experience, I have cultivated robust skills in communication, teamwork, problem-solving, and event management.
           </p>
           <p class="about-bio">
-            Hiện tại tôi đang tìm kiếm cơ hội thực tập để áp dụng kiến thức học thuật, tích lũy kinh nghiệm thực tiễn và đóng góp vào môi trường làm việc chuyên nghiệp.
+            I am currently seeking internship opportunities to apply my academic knowledge, gain practical corporate insights, and add tangible value to a professional environment.
           </p>
-          <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;" id="btn-about-contact">Kết nối với tôi</a>
+          <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;" id="btn-about-contact">Connect With Me</a>
         </div>
         <div class="about-right">
           <div class="info-card">
-            <div class="info-row"><span class="info-label">Họ và tên</span><span class="info-val">Nguyễn Thu Hương</span></div>
-            <div class="info-row"><span class="info-label">Ngày sinh</span><span class="info-val">19/01/2005</span></div>
-            <div class="info-row"><span class="info-label">Trường</span><span class="info-val">Đại học Ngoại Thương (FTU)</span></div>
-            <div class="info-row"><span class="info-label">Chương trình</span><span class="info-val">Kinh tế Quốc tế CLC</span></div>
-            <div class="info-row"><span class="info-label">Năm học</span><span class="info-val">Năm 3</span></div>
-            <div class="info-row"><span class="info-label">IELTS</span><span class="info-val">7.0</span></div>
-            <div class="info-row"><span class="info-label">Điện thoại</span><span class="info-val">0912 302 262</span></div>
-            <div class="info-row"><span class="info-label">Địa điểm</span><span class="info-val">Hà Nội, Việt Nam</span></div>
+            <div class="info-row"><span class="info-label">Full Name</span><span class="info-val">Nguyen Thu Huong</span></div>
+            <div class="info-row"><span class="info-label">Date of Birth</span><span class="info-val">January 19, 2005</span></div>
+            <div class="info-row"><span class="info-label">University</span><span class="info-val">Foreign Trade University (FTU)</span></div>
+            <div class="info-row"><span class="info-label">Major</span><span class="info-val">International Economics (High-Quality)</span></div>
+            <div class="info-row"><span class="info-label">Academic Year</span><span class="info-val">3rd Year</span></div>
+            <div class="info-row"><span class="info-label">IELTS Score</span><span class="info-val">7.0</span></div>
+            <div class="info-row"><span class="info-label">Phone</span><span class="info-val">0912 302 262</span></div>
+            <div class="info-row"><span class="info-label">Location</span><span class="info-val">Hanoi, Vietnam</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
   <section id="education" class="alt-bg">
     <div class="section-inner">
-      <div class="section-label">02 — Học Vấn</div>
-      <h2 class="section-title">Hành Trình Học Tập</h2>
+      <div class="section-label">02 — Education</div>
+      <h2 class="section-title">Academic Journey</h2>
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
-            <div class="timeline-period">2023 – Nay</div>
-            <h3 class="timeline-school">Đại học Ngoại Thương (FTU)</h3>
-            <p class="timeline-degree">Chương trình Chất lượng cao – Kinh tế Quốc tế</p>
+            <div class="timeline-period">2023 – Present</div>
+            <h3 class="timeline-school">Foreign Trade University (FTU)</h3>
+            <p class="timeline-degree">High-Quality Program – Bachelor of International Economics</p>
             <div class="coursework-tags">
-              <span>Kinh tế Quốc tế</span>
-              <span>Thương mại Quốc tế</span>
-              <span>Tài chính Doanh nghiệp</span>
-              <span>Phân tích BCTC</span>
-              <span>Kinh tế Lượng</span>
-              <span>Kinh tế Khu vực</span>
-              <span>Kinh doanh Quốc tế</span>
+              <span>International Economics</span>
+              <span>International Trade</span>
+              <span>Corporate Finance</span>
+              <span>Financial Statement Analysis</span>
+              <span>Econometrics</span>
+              <span>Regional Economics</span>
+              <span>International Business</span>
             </div>
           </div>
         </div>
@@ -135,97 +129,96 @@
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-period">2020 – 2023</div>
-            <h3 class="timeline-school">THPT Chuyên Biên Hòa</h3>
-            <p class="timeline-degree">Chuyên Toán</p>
-            <p class="timeline-desc">Tích cực tham gia các tổ chức học sinh và các dự án môi trường, phát triển kỹ năng lãnh đạo và gắn kết cộng đồng song song với thành tích học tập xuất sắc.</p>
+            <h3 class="timeline-school">Bien Hoa Gifted High School</h3>
+            <p class="timeline-degree">Mathematics-focused Stream</p>
+            <p class="timeline-desc">Actively participated in student organizations and environmental initiatives, developing leadership and community engagement skills alongside excellent academic performance.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LEADERSHIP & ACTIVITIES -->
   <section id="leadership">
     <div class="section-inner">
-      <div class="section-label">03 — Hoạt Động</div>
-      <h2 class="section-title">Lãnh Đạo & Ngoại Khóa</h2>
+      <div class="section-label">03 — Activities</div>
+      <h2 class="section-title">Leadership & Extra-curriculars</h2>
       <div class="activities-grid">
 
         <div class="activity-card" id="act1">
           <div class="act-icon">🌐</div>
-          <div class="act-badge current">Hiện tại</div>
-          <h3>Phó Trưởng Ban Đối Ngoại</h3>
+          <div class="act-badge current">Present</div>
+          <h3>Vice Head of External Relations</h3>
           <p class="act-org">Global Economic Club (GEC) – FTU</p>
-          <p class="act-period">2025 – Nay</p>
+          <p class="act-period">2025 – Present</p>
           <ul class="act-list">
-            <li>Xây dựng và duy trì quan hệ với nhà tài trợ và đối tác bên ngoài</li>
-            <li>Tham gia đề xuất tài trợ và đàm phán hợp tác</li>
-            <li>Hỗ trợ gây quỹ và phối hợp tổ chức sự kiện</li>
+            <li>Build and maintain strategic relationships with corporate sponsors and external partners</li>
+            <li>Draft sponsorship proposals and lead partnership negotiations</li>
+            <li>Support fundraising initiatives and collaborate on large-scale event execution</li>
           </ul>
         </div>
 
         <div class="activity-card" id="act2">
           <div class="act-icon">👑</div>
-          <div class="act-badge current">Hiện tại</div>
-          <h3>Chủ Tịch Hội Sinh Viên</h3>
-          <p class="act-org">A06 – Kinh tế Quốc tế CLC – FTU</p>
-          <p class="act-period">2023 – Nay</p>
+          <div class="act-badge current">Present</div>
+          <h3>Class Student Union President</h3>
+          <p class="act-org">Class English 06 - International Economics (High-Quality) – FTU</p>
+          <p class="act-period">2023 – Present</p>
           <ul class="act-list">
-            <li>Lãnh đạo các hoạt động phúc lợi sinh viên và xây dựng cộng đồng</li>
-            <li>Điều phối các sáng kiến tình nguyện và xã hội</li>
-            <li>Tăng cường sự tham gia và hợp tác của sinh viên</li>
+            <li>Lead student welfare initiatives and foster a highly engaged class community</li>
+            <li>Coordinate volunteer activities and social responsibility campaigns</li>
+            <li>Enhance student participation and drive collaborative academic efforts</li>
           </ul>
         </div>
 
         <div class="activity-card" id="act3">
           <div class="act-icon">📋</div>
-          <div class="act-badge current">Hiện tại</div>
-          <h3>Phó Bí Thư Chi Đoàn</h3>
-          <p class="act-org">A06 – Kinh tế Quốc tế CLC – FTU</p>
-          <p class="act-period">2023 – Nay</p>
+          <div class="act-badge current">Present</div>
+          <h3>Vice Youth Union Secretary</h3>
+          <p class="act-org">Class English 06 - International Economics (High-Quality) – FTU</p>
+          <p class="act-period">2023 – Present</p>
           <ul class="act-list">
-            <li>Điều phối hoạt động lớp và chương trình gắn kết sinh viên</li>
-            <li>Hỗ trợ kết nối giữa sinh viên và giảng viên</li>
-            <li>Tổ chức các sự kiện học thuật và ngoại khóa</li>
+            <li>Manage class operations and execute student bonding engagement programs</li>
+            <li>Serve as a primary liaison between students and university faculty members</li>
+            <li>Organize academic seminars and extra-curricular events</li>
           </ul>
         </div>
 
         <div class="activity-card" id="act4">
           <div class="act-icon">🤝</div>
           <div class="act-badge past">2024–2025</div>
-          <h3>Thành Viên Ban Đối Ngoại</h3>
+          <h3>External Relations Executive</h3>
           <p class="act-org">Global Economic Club (GEC) – FTU</p>
           <p class="act-period">2024 – 2025</p>
           <ul class="act-list">
-            <li>Hỗ trợ tiếp cận nhà tài trợ và phát triển đối tác</li>
-            <li>Hỗ trợ truyền thông với tổ chức bên ngoài</li>
-            <li>Đóng góp lập kế hoạch và thực thi sự kiện</li>
+            <li>Assisted in sponsor outreach and corporate partner development</li>
+            <li>Supported public relations and external communication channels</li>
+            <li>Contributed to event planning, logistics, and on-site operation</li>
           </ul>
         </div>
 
         <div class="activity-card" id="act5">
           <div class="act-icon">🌿</div>
           <div class="act-badge past">2023</div>
-          <h3>Phó Chủ Tịch CLB Lãnh Đạo Môi Trường</h3>
-          <p class="act-org">THPT Chuyên Biên Hòa</p>
+          <h3>Vice President</h3>
+          <p class="act-org">Eco Leadership Club (ELC) – Bien Hoa Gifted High School</p>
           <p class="act-period">2023</p>
           <ul class="act-list">
-            <li>Phối hợp các chiến dịch nâng cao nhận thức môi trường</li>
-            <li>Quản lý dự án câu lạc bộ và hoạt động thành viên</li>
-            <li>Tổ chức các sáng kiến môi trường toàn trường</li>
+            <li>Co-managed school-wide environmental awareness and green campaigns</li>
+            <li>Oversaw club project timelines and member development activities</li>
+            <li>Organized actionable eco-friendly initiatives across the campus</li>
           </ul>
         </div>
 
         <div class="activity-card" id="act6">
           <div class="act-icon">🎯</div>
           <div class="act-badge past">2022</div>
-          <h3>Trưởng Ban Hành Động</h3>
-          <p class="act-org">CLB Lãnh Đạo Môi Trường – THPT Chuyên Biên Hòa</p>
+          <h3>Head of Action Department</h3>
+          <p class="act-org">Eco Leadership Club (ELC) – Bien Hoa Gifted High School</p>
           <p class="act-period">2022</p>
           <ul class="act-list">
-            <li>Dẫn dắt hoạt động tình nguyện và dự án môi trường</li>
-            <li>Điều phối triển khai chiến dịch và hậu cần</li>
-            <li>Phối hợp với các ban để đạt mục tiêu dự án</li>
+            <li>Spearheaded volunteer operations and hands-on environmental projects</li>
+            <li>Coordinated ground logistics and campaign execution workflows</li>
+            <li>Collaborated with internal departments to achieve project targets</li>
           </ul>
         </div>
 
@@ -233,35 +226,34 @@
     </div>
   </section>
 
-  <!-- TEACHING -->
   <section id="teaching" class="alt-bg">
     <div class="section-inner">
-      <div class="section-label">04 — Kinh Nghiệm</div>
-      <h2 class="section-title">Kinh Nghiệm Giảng Dạy</h2>
+      <div class="section-label">04 — Experience</div>
+      <h2 class="section-title">Teaching Experience</h2>
       <div class="teaching-card">
         <div class="teaching-icon">📚</div>
         <div class="teaching-info">
-          <h3>Gia Sư Cá Nhân</h3>
-          <p class="teaching-period">2022 – Hiện tại &nbsp;|&nbsp; Hơn 3 năm kinh nghiệm</p>
+          <h3>Private Tutor</h3>
+          <p class="teaching-period">2022 – Present &nbsp;|&nbsp; 3+ Years of Experience</p>
           <div class="teaching-two-col">
             <div>
-              <p class="col-title">Trách nhiệm</p>
+              <p class="col-title">Responsibilities</p>
               <ul>
-                <li>Xây dựng kế hoạch học tập cá nhân hóa</li>
-                <li>Hỗ trợ học sinh cải thiện kết quả học tập</li>
-                <li>Tăng cường sự tự tin và động lực học tập</li>
-                <li>Giao tiếp hiệu quả với học sinh và phụ huynh</li>
+                <li>Design personalized, goal-oriented study roadmaps for students</li>
+                <li>Provide dedicated academic support to visibly improve academic performance</li>
+                <li>Foster student confidence and cultivate long-term learning motivation</li>
+                <li>Maintain clear, effective communication with both students and parents</li>
               </ul>
             </div>
             <div>
-              <p class="col-title">Kỹ năng phát triển</p>
+              <p class="col-title">Core Skills Developed</p>
               <div class="skill-chips">
-                <span>Giao tiếp</span>
-                <span>Thuyết trình</span>
-                <span>Lãnh đạo</span>
-                <span>Kiên nhẫn</span>
-                <span>Quản lý thời gian</span>
-                <span>Giải quyết vấn đề</span>
+                <span>Communication</span>
+                <span>Presentation</span>
+                <span>Leadership</span>
+                <span>Patience</span>
+                <span>Time Management</span>
+                <span>Problem Solving</span>
               </div>
             </div>
           </div>
@@ -270,29 +262,28 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="section-inner">
-      <div class="section-label">05 — Kỹ Năng</div>
-      <h2 class="section-title">Năng Lực Cốt Lõi</h2>
+      <div class="section-label">05 — Skills</div>
+      <h2 class="section-title">Core Competencies</h2>
       <div class="skills-grid">
 
         <div class="skill-category" id="sk1">
           <div class="skill-cat-icon">💼</div>
-          <h3>Kỹ năng Chuyên môn</h3>
+          <h3>Professional Skills</h3>
           <div class="skill-bars">
-            <div class="skill-bar-item"><span>Giao tiếp & PR</span><div class="bar"><div class="bar-fill" data-pct="92"></div></div></div>
-            <div class="skill-bar-item"><span>Đàm phán</span><div class="bar"><div class="bar-fill" data-pct="85"></div></div></div>
-            <div class="skill-bar-item"><span>Lãnh đạo</span><div class="bar"><div class="bar-fill" data-pct="90"></div></div></div>
-            <div class="skill-bar-item"><span>Làm việc nhóm</span><div class="bar"><div class="bar-fill" data-pct="95"></div></div></div>
-            <div class="skill-bar-item"><span>Tổ chức sự kiện</span><div class="bar"><div class="bar-fill" data-pct="88"></div></div></div>
-            <div class="skill-bar-item"><span>Quản lý thời gian</span><div class="bar"><div class="bar-fill" data-pct="87"></div></div></div>
+            <div class="skill-bar-item"><span>Communication & PR</span><div class="bar"><div class="bar-fill" data-pct="92"></div></div></div>
+            <div class="skill-bar-item"><span>Negotiation</span><div class="bar"><div class="bar-fill" data-pct="85"></div></div></div>
+            <div class="skill-bar-item"><span>Leadership</span><div class="bar"><div class="bar-fill" data-pct="90"></div></div></div>
+            <div class="skill-bar-item"><span>Teamwork</span><div class="bar"><div class="bar-fill" data-pct="95"></div></div></div>
+            <div class="skill-bar-item"><span>Event Management</span><div class="bar"><div class="bar-fill" data-pct="88"></div></div></div>
+            <div class="skill-bar-item"><span>Time Management</span><div class="bar"><div class="bar-fill" data-pct="87"></div></div></div>
           </div>
         </div>
 
         <div class="skill-category" id="sk2">
           <div class="skill-cat-icon">💻</div>
-          <h3>Kỹ năng Kỹ thuật</h3>
+          <h3>Technical Skills</h3>
           <div class="skill-items-wrap">
             <div class="skill-pill has-icon"><span class="pill-icon">📊</span>Microsoft Excel</div>
             <div class="skill-pill has-icon"><span class="pill-icon">📝</span>Microsoft Word</div>
@@ -300,27 +291,27 @@
             <div class="skill-pill has-icon"><span class="pill-icon">☁️</span>Google Workspace</div>
             <div class="skill-pill has-icon"><span class="pill-icon">🎨</span>Canva</div>
             <div class="skill-pill has-icon"><span class="pill-icon">🔍</span>Internet Research</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">📈</span>Phân tích Dữ liệu cơ bản</div>
+            <div class="skill-pill has-icon"><span class="pill-icon">📈</span>Basic Data Analysis</div>
           </div>
         </div>
 
         <div class="skill-category" id="sk3">
           <div class="skill-cat-icon">🌏</div>
-          <h3>Ngôn ngữ</h3>
+          <h3>Languages</h3>
           <div class="lang-items">
             <div class="lang-item">
               <div class="lang-flag">🇻🇳</div>
               <div class="lang-info">
-                <div class="lang-name">Tiếng Việt</div>
-                <div class="lang-level">Bản ngữ</div>
+                <div class="lang-name">Vietnamese</div>
+                <div class="lang-level">Native</div>
                 <div class="lang-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div>
               </div>
             </div>
             <div class="lang-item">
               <div class="lang-flag">🇬🇧</div>
               <div class="lang-info">
-                <div class="lang-name">Tiếng Anh</div>
-                <div class="lang-level">IELTS 7.0 – Thành thạo</div>
+                <div class="lang-name">English</div>
+                <div class="lang-level">IELTS 7.0 – Proficient</div>
                 <div class="lang-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot half"></span></div>
               </div>
             </div>
@@ -331,82 +322,79 @@
     </div>
   </section>
 
-  <!-- ACHIEVEMENTS -->
   <section id="achievements" class="alt-bg">
     <div class="section-inner">
-      <div class="section-label">06 — Thành Tích</div>
-      <h2 class="section-title">Những Dấu Ấn Nổi Bật</h2>
+      <div class="section-label">06 — Achievements</div>
+      <h2 class="section-title">Key Highlights</h2>
       <div class="achievements-list">
         <div class="achievement-item" id="ach1">
           <div class="ach-num">01</div>
           <div class="ach-content">
             <h3>IELTS Overall Band Score 7.0</h3>
-            <p>Đạt trình độ tiếng Anh nâng cao, đáp ứng yêu cầu môi trường quốc tế chuyên nghiệp.</p>
+            <p>Demonstrated advanced English proficiency, thoroughly prepared for global corporate environments.</p>
           </div>
         </div>
         <div class="achievement-item" id="ach2">
           <div class="ach-num">02</div>
           <div class="ach-content">
-            <h3>Phó Trưởng Ban Đối Ngoại – GEC</h3>
-            <p>Đảm nhận vai trò lãnh đạo trong câu lạc bộ uy tín nhất tại FTU về quan hệ đối ngoại.</p>
+            <h3>Vice Head of External Relations – GEC</h3>
+            <p>Assumed a core executive leadership role within FTU’s premier economic and corporate relations student club.</p>
           </div>
         </div>
         <div class="achievement-item" id="ach3">
           <div class="ach-num">03</div>
           <div class="ach-content">
-            <h3>Chủ Tịch Hội Sinh Viên A06</h3>
-            <p>Lãnh đạo và gắn kết cộng đồng sinh viên trong chương trình quốc tế chất lượng cao.</p>
+            <h3>Class Student Union President</h3>
+            <p>Led and fostered academic and social engagement for a high-quality international economics cohort.</p>
           </div>
         </div>
         <div class="achievement-item" id="ach4">
           <div class="ach-num">04</div>
           <div class="ach-content">
-            <h3>Phó Chủ Tịch CLB Môi Trường (ELC)</h3>
-            <p>Dẫn dắt các chiến dịch bảo vệ môi trường quy mô toàn trường tại THPT Chuyên Biên Hòa.</p>
+            <h3>Vice President – Eco Leadership Club</h3>
+            <p>Drove significant campus-wide green campaigns and sustainability initiatives at Bien Hoa Gifted High School.</p>
           </div>
         </div>
         <div class="achievement-item" id="ach5">
           <div class="ach-num">05</div>
           <div class="ach-content">
-            <h3>Hơn 3 năm kinh nghiệm Gia Sư</h3>
-            <p>Xây dựng kỹ năng giao tiếp, lãnh đạo và giải quyết vấn đề qua thực tiễn giảng dạy.</p>
+            <h3>3+ Years of Independent Tutoring</h3>
+            <p>Polished interpersonal, mentorship, and adaptive communication skills through extensive teaching experience.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CAREER OBJECTIVE -->
   <section id="career">
     <div class="section-inner">
-      <div class="section-label">07 — Mục Tiêu</div>
-      <h2 class="section-title">Định Hướng Sự Nghiệp</h2>
+      <div class="section-label">07 — Objective</div>
+      <h2 class="section-title">Career Direction</h2>
       <div class="career-card">
         <div class="career-quote">"</div>
         <p class="career-text">
-          Là sinh viên Kinh tế Quốc tế, tôi hướng tới xây dựng sự nghiệp trong lĩnh vực <strong>kinh doanh, tài chính, thương mại quốc tế hoặc quan hệ doanh nghiệp</strong>. Tôi mong muốn tích lũy kinh nghiệm thực tiễn qua các cơ hội thực tập, nơi tôi có thể đóng góp kỹ năng giao tiếp, lãnh đạo và phân tích, đồng thời không ngừng phát triển chuyên môn.
+          As an International Economics student, I aim to build a robust professional path in <strong>business development, finance, international trade, or corporate relations</strong>. I look forward to securing an impactful internship where I can leverage my communication, leadership, and analytical strengths while continuously acquiring corporate expertise.
         </p>
         <div class="career-domains">
-          <span>🏦 Tài chính</span>
-          <span>🌐 Thương mại Quốc tế</span>
-          <span>📊 Kinh doanh</span>
-          <span>🤝 Quan hệ Doanh nghiệp</span>
-          <span>🌱 Phát triển Bền vững</span>
+          <span>🏦 Finance</span>
+          <span>🌐 International Trade</span>
+          <span>📊 Business</span>
+          <span>🤝 Corporate Relations</span>
+          <span>🌱 Sustainability</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="alt-bg">
     <div class="section-inner">
-      <div class="section-label">08 — Liên Hệ</div>
-      <h2 class="section-title">Kết Nối Với Tôi</h2>
-      <p class="contact-intro">Tôi luôn mở cửa cho các cơ hội thực tập, hợp tác và kết nối chuyên nghiệp. Hãy liên hệ với tôi!</p>
+      <div class="section-label">08 — Contact</div>
+      <h2 class="section-title">Connect With Me</h2>
+      <p class="contact-intro">I am always open to internship opportunities, professional collaborations, and networking. Let's get in touch!</p>
       <div class="contact-cards">
         <a href="tel:0912302262" class="contact-card" id="cc-phone">
           <div class="cc-icon">📞</div>
-          <div class="cc-label">Điện thoại</div>
+          <div class="cc-label">Phone</div>
           <div class="cc-value">0912 302 262</div>
         </a>
         <a href="mailto:nguyenthuhuong.19012005@gmail.com" class="contact-card" id="cc-email">
@@ -417,20 +405,19 @@
         <a href="https://www.linkedin.com/in/h%C6%B0%C6%A1ng-nguy%E1%BB%85n-0a07001b5/" target="_blank" rel="noopener" class="contact-card" id="cc-linkedin">
           <div class="cc-icon">💼</div>
           <div class="cc-label">LinkedIn</div>
-          <div class="cc-value">Nguyễn Hương</div>
+          <div class="cc-value">Nguyen Huong</div>
         </a>
         <div class="contact-card" id="cc-location">
           <div class="cc-icon">📍</div>
-          <div class="cc-label">Địa điểm</div>
-          <div class="cc-value">Hà Nội, Việt Nam</div>
+          <div class="cc-label">Location</div>
+          <div class="cc-value">Hanoi, Vietnam</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p>© 2025 Nguyễn Thu Hương · Được tạo với ❤️ · FTU International Economics</p>
+    <p>© 2026 Nguyen Thu Huong · Made with ❤️ · FTU International Economics</p>
   </footer>
 
   <script src="script.js"></script>
