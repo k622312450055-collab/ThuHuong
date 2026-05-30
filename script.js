@@ -363,3 +363,33 @@ if (roleEl) {
   roleEl.style.transition = 'opacity 1s ease 0.5s';
   setTimeout(() => { roleEl.style.opacity = '1'; }, 300);
 }
+// Thêm hiệu ứng hoa tu-líp nở theo dòng cuộn
+window.addEventListener('scroll', () => {
+    // 1. Lấy độ cao đã cuộn hiện tại của trang
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // 2. Lấy tổng độ cao có thể cuộn của cả trang
+    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    // 3. Tính phần trăm đã cuộn (từ 0 đến 1)
+    let scrollPercentage = 0;
+    if (totalHeight > 0) {
+        scrollPercentage = scrollTop / totalHeight;
+    }
+
+    // 4. Định nghĩa góc nở tối đa (ví dụ 50 độ)
+    const maxBloomAngle = 50;
+
+    // 5. Tính toán góc xoay dựa trên phần trăm (0% -> -10 độ, 100% -> -60 độ)
+    const leftRotation = -10 - (scrollPercentage * maxBloomAngle);
+    const rightRotation = 10 + (scrollPercentage * maxBloomAngle);
+
+    // 6. Áp dụng góc xoay vào các cánh hoa
+    const leftPetal = document.querySelector('.left-petal');
+    const rightPetal = document.querySelector('.right-petal');
+
+    if (leftPetal && rightPetal) {
+        leftPetal.style.transform = `rotate(${leftRotation}deg)`;
+        rightPetal.style.transform = `rotate(${rightRotation}deg)`;
+    }
+});
