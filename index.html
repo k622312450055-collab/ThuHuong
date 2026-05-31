@@ -1,620 +1,594 @@
-<!DOCTYPE html> 
-<html lang="en">  
-<head> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyen Thu Huong – Portfolio</title>
-  <meta name="description" content="Personal Portfolio of Nguyen Thu Huong – International Economics Student at Foreign Trade University, passionate about business, finance, and international relations." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nguyễn Thu Hương | International Economics Portfolio</title>
+  <meta name="description" content="Portfolio of Nguyễn Thu Hương – International Economics Student at FTU, passionate about business development, finance, and international trade."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <canvas id="bgCanvas"></canvas>
+  <!-- ── CANVAS LAYER (petals + butterflies) ── -->
+  <canvas id="animCanvas"></canvas>
 
+  <!-- ── FLOATING BLOBS ── -->
+  <div class="blob-layer" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+  </div>
+
+  <!-- ── NAV ── -->
   <nav id="navbar">
     <div class="nav-inner">
-      <a class="nav-logo" href="#hero">Thu Huong</a>
+      <a href="#hero" class="nav-logo">Thu Hương<span class="dot">✦</span></a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
-        <li><a href="#leadership">Activities</a></li>
+        <li><a href="#leadership">Leadership</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="#about" onclick="closeMobile()">About</a></li>
-      <li><a href="#education" onclick="closeMobile()">Education</a></li>
-      <li><a href="#leadership" onclick="closeMobile()">Activities</a></li>
-      <li><a href="#skills" onclick="closeMobile()">Skills</a></li>
-      <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
-    </ul>
+    <a href="#about" class="mm-link">About</a>
+    <a href="#education" class="mm-link">Education</a>
+    <a href="#leadership" class="mm-link">Leadership</a>
+    <a href="#skills" class="mm-link">Skills</a>
+    <a href="#achievements" class="mm-link">Achievements</a>
+    <a href="#contact" class="mm-link">Contact</a>
   </div>
 
+  <!-- ══════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════ -->
   <section id="hero">
     <div class="hero-content">
+      <p class="hero-eyebrow reveal">✦ &nbsp;International Economics &nbsp; · &nbsp; FTU &nbsp; · &nbsp; Hanoi&nbsp; ✦</p>
+      <h1 class="hero-name reveal">Nguyễn<br/><em>Thu Hương</em></h1>
+      <p class="hero-sub reveal">
+        Third-year student · External Relations Leader · Future Business & Finance Professional
+      </p>
+      <div class="hero-badges reveal">
+        <span class="badge">IELTS 7.0</span>
+        <span class="badge">3+ Yrs Tutoring</span>
+        <span class="badge">GEC Vice Head</span>
+        <span class="badge">Class President</span>
+      </div>
+      <div class="hero-actions reveal">
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+        <a href="#about" class="btn-ghost">Learn More ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
       <div class="hero-photo-wrap">
-        <img src="photo.jpg" alt="Nguyen Thu Huong" class="hero-photo" id="heroPhoto" onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex';" />
-        <div class="hero-initials" id="heroInitials">NTH</div>
-        <div class="hero-photo-ring"></div>
-        <div class="hero-photo-ring ring2"></div>
-      </div>
-      <div class="hero-text">
-        <p class="hero-greeting">Hello, I am</p>
-        <h1 class="hero-name">Nguyen Thu Huong</h1>
-        <p class="hero-role">International Economics Student <span class="dot">·</span> External Relations <span class="dot">·</span> Future Finance Professional</p>
-        <p class="hero-tagline">"Growth comes from continuous learning, meaningful experiences, and the courage to take on new challenges."</p>
-        <div class="hero-cta">
-          <a href="#about" class="btn-primary" id="btn-explore">Explore</a>
-          <a href="#contact" class="btn-ghost" id="btn-contact">Contact Me</a>
+        <!-- Dashed rotating ring with heart ornaments -->
+        <div class="dashed-ring-wrap">
+          <span class="ring-heart rh-top">♥</span>
+          <span class="ring-heart rh-right">♥</span>
+          <span class="ring-heart rh-bottom">♥</span>
+          <span class="ring-heart rh-left">♥</span>
         </div>
-        <div class="hero-badges">
-          <span class="badge">🎓 FTU</span>
-          <span class="badge">🌐 IELTS 7.0</span>
-          <span class="badge">📌 Hanoi</span>
+        <img src="photo.jpg" alt="Nguyễn Thu Hương" class="hero-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="hero-photo-fallback">
+          <span>N</span><span>T</span><span>H</span>
+        </div>
+        <div class="photo-badge">🌸 FTU</div>
+      </div>
+
+      <!-- floating info cards -->
+      <div class="info-card card-top-right reveal-card">
+        <span class="card-icon">🎓</span>
+        <div>
+          <p class="card-label">University</p>
+          <p class="card-val">Foreign Trade University</p>
         </div>
       </div>
-    </div>
-    <div class="scroll-hint">
-      <span>Scroll Down</span>
-      <div class="scroll-arrow"></div>
+      <div class="info-card card-bot-left reveal-card">
+        <span class="card-icon">🌍</span>
+        <div>
+          <p class="card-label">Program</p>
+          <p class="card-val">Intl. Economics (HQ)</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="section-inner">
-      <div class="section-label">01 — About Me</div>
-      <h2 class="section-title">Biography</h2>
+  <!-- ══════════════════════════════════
+       ABOUT SECTION
+  ══════════════════════════════════ -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">Who I Am</p>
+        <h2 class="section-title reveal">About Me</h2>
+      </div>
+
       <div class="about-grid">
-        <div class="about-left">
-          <p class="about-bio">
-            I am <strong>Nguyen Thu Huong</strong>, a third-year student in the High-Quality Program of International Economics at Foreign Trade University (FTU). I have a strong passion for economics, international business, and finance — particularly in business development, strategic partnerships, and sustainable growth.
+        <div class="about-text reveal">
+          <p>
+            Hello! I'm <strong>Nguyễn Thu Hương</strong>, a passionate third-year student in the
+            <em>High-Quality International Economics Program</em> at Foreign Trade University (FTU), Hanoi.
           </p>
-          <p class="about-bio">
-            Through leadership roles in student organizations and over three years of teaching experience, I have cultivated robust skills in communication, teamwork, problem-solving, and event management.
+          <p>
+            I am driven by curiosity about economics, international business, and finance. Through leadership roles in student organizations and years of tutoring, I have cultivated strong communication, teamwork, problem-solving, and organizational skills.
           </p>
-          <p class="about-bio">
-            I am currently seeking internship opportunities to apply my academic knowledge, gain practical corporate insights, and add tangible value to a professional environment.
+          <p>
+            I am currently seeking <strong>internship opportunities</strong> where I can apply academic knowledge, gain real-world experience, and contribute meaningfully to a dynamic professional environment.
           </p>
-          <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;" id="btn-about-contact">Connect With Me</a>
+          <blockquote class="about-quote">
+            "Growth comes from continuous learning, meaningful experiences, and the courage to take on new challenges."
+          </blockquote>
         </div>
-        <div class="about-right">
-          <div class="info-card">
-            <div class="info-row"><span class="info-label">Full Name</span><span class="info-val">Nguyen Thu Huong</span></div>
-            <div class="info-row"><span class="info-label">Date of Birth</span><span class="info-val">January 19, 2005</span></div>
-            <div class="info-row"><span class="info-label">University</span><span class="info-val">Foreign Trade University (FTU)</span></div>
-            <div class="info-row"><span class="info-label">Major</span><span class="info-val">International Economics (High-Quality)</span></div>
-            <div class="info-row"><span class="info-label">Academic Year</span><span class="info-val">3rd Year</span></div>
-            <div class="info-row"><span class="info-label">IELTS Score</span><span class="info-val">7.0</span></div>
-            <div class="info-row"><span class="info-label">Phone</span><span class="info-val">0912 302 262</span></div>
-            <div class="info-row"><span class="info-label">Location</span><span class="info-val">Hanoi, Vietnam</span></div>
+
+        <div class="about-stats reveal">
+          <div class="stat-card">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Years Tutoring</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">7.0</span>
+            <span class="stat-label">IELTS Band</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">5+</span>
+            <span class="stat-label">Leadership Roles</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">2</span>
+            <span class="stat-label">Languages</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Info strip -->
+      <div class="info-strip reveal">
+        <div class="info-item">
+          <span class="info-icon">🎂</span>
+          <div>
+            <p class="info-key">Date of Birth</p>
+            <p class="info-val">January 19, 2005</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <div>
+            <p class="info-key">Location</p>
+            <p class="info-val">Hanoi, Vietnam</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📞</span>
+          <div>
+            <p class="info-key">Phone</p>
+            <p class="info-val">0912 302 262</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🌐</span>
+          <div>
+            <p class="info-key">English</p>
+            <p class="info-val">IELTS 7.0</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="education" class="alt-bg">
-    <div class="section-inner">
-      <div class="section-label">02 — Education</div>
-      <h2 class="section-title">Academic Journey</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-period">2023 – Present</div>
-            <h3 class="timeline-school">Foreign Trade University (FTU)</h3>
-            <p class="timeline-degree">High-Quality Program – Bachelor of International Economics</p>
-            <div class="coursework-tags">
-              <span>International Economics</span>
-              <span>International Trade</span>
-              <span>Corporate Finance</span>
-              <span>Financial Statement Analysis</span>
-              <span>Econometrics</span>
-              <span>Regional Economics</span>
-              <span>International Business</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-period">2020 – 2023</div>
-            <h3 class="timeline-school">Bien Hoa Gifted High School</h3>
-            <p class="timeline-degree">Mathematics-focused Stream</p>
-            <p class="timeline-desc">Actively participated in student organizations and environmental initiatives, developing leadership and community engagement skills alongside excellent academic performance.</p>
-          </div>
-        </div>
+  <!-- ══════════════════════════════════
+       EDUCATION SECTION
+  ══════════════════════════════════ -->
+  <section id="education" class="section alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">Academic Journey</p>
+        <h2 class="section-title reveal">Education</h2>
       </div>
-    </div>
-  </section>
 
-  <section id="leadership">
-    <div class="section-inner">
-      <div class="section-label">03 — Activities</div>
-      <h2 class="section-title">Leadership & Extra-curriculars</h2>
-      <div class="activities-grid">
-
-        <div class="activity-card" id="act1">
-          <div class="act-icon">🌐</div>
-          <div class="act-badge current">Present</div>
-          <h3>Vice Head of External Relations</h3>
-          <p class="act-org">Global Economic Club (GEC) – FTU</p>
-          <p class="act-period">2025 – Present</p>
-          <ul class="act-list">
-            <li>Build and maintain strategic relationships with corporate sponsors and external partners</li>
-            <li>Draft sponsorship proposals and lead partnership negotiations</li>
-            <li>Support fundraising initiatives and collaborate on large-scale event execution</li>
-          </ul>
-        </div>
-
-        <div class="activity-card" id="act2">
-          <div class="act-icon">👑</div>
-          <div class="act-badge current">Present</div>
-          <h3>Class Student Union President</h3>
-          <p class="act-org">Class English 06 - International Economics (High-Quality) – FTU</p>
-          <p class="act-period">2023 – Present</p>
-          <ul class="act-list">
-            <li>Lead student welfare initiatives and foster a highly engaged class community</li>
-            <li>Coordinate volunteer activities and social responsibility campaigns</li>
-            <li>Enhance student participation and drive collaborative academic efforts</li>
-          </ul>
-        </div>
-
-        <div class="activity-card" id="act3">
-          <div class="act-icon">📋</div>
-          <div class="act-badge current">Present</div>
-          <h3>Vice Youth Union Secretary</h3>
-          <p class="act-org">Class English 06 - International Economics (High-Quality) – FTU</p>
-          <p class="act-period">2023 – Present</p>
-          <ul class="act-list">
-            <li>Manage class operations and execute student bonding engagement programs</li>
-            <li>Serve as a primary liaison between students and university faculty members</li>
-            <li>Organize academic seminars and extra-curricular events</li>
-          </ul>
-        </div>
-
-        <div class="activity-card" id="act4">
-          <div class="act-icon">🤝</div>
-          <div class="act-badge past">2024–2025</div>
-          <h3>External Relations Executive</h3>
-          <p class="act-org">Global Economic Club (GEC) – FTU</p>
-          <p class="act-period">2024 – 2025</p>
-          <ul class="act-list">
-            <li>Assisted in sponsor outreach and corporate partner development</li>
-            <li>Supported public relations and external communication channels</li>
-            <li>Contributed to event planning, logistics, and on-site operation</li>
-          </ul>
-        </div>
-
-        <div class="activity-card" id="act5">
-          <div class="act-icon">🌿</div>
-          <div class="act-badge past">2023</div>
-          <h3>Vice President</h3>
-          <p class="act-org">Eco Leadership Club (ELC) – Bien Hoa Gifted High School</p>
-          <p class="act-period">2023</p>
-          <ul class="act-list">
-            <li>Co-managed school-wide environmental awareness and green campaigns</li>
-            <li>Oversaw club project timelines and member development activities</li>
-            <li>Organized actionable eco-friendly initiatives across the campus</li>
-          </ul>
-        </div>
-
-        <div class="activity-card" id="act6">
-          <div class="act-icon">🎯</div>
-          <div class="act-badge past">2022</div>
-          <h3>Head of Action Department</h3>
-          <p class="act-org">Eco Leadership Club (ELC) – Bien Hoa Gifted High School</p>
-          <p class="act-period">2022</p>
-          <ul class="act-list">
-            <li>Spearheaded volunteer operations and hands-on environmental projects</li>
-            <li>Coordinated ground logistics and campaign execution workflows</li>
-            <li>Collaborated with internal departments to achieve project targets</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="teaching" class="alt-bg">
-    <div class="section-inner">
-      <div class="section-label">04 — Experience</div>
-      <h2 class="section-title">Teaching Experience</h2>
-      <div class="teaching-card">
-        <div class="teaching-icon">📚</div>
-        <div class="teaching-info">
-          <h3>Private Tutor</h3>
-          <p class="teaching-period">2022 – Present &nbsp;|&nbsp; 3+ Years of Experience</p>
-          <div class="teaching-two-col">
-            <div>
-              <p class="col-title">Responsibilities</p>
-              <ul>
-                <li>Design personalized, goal-oriented study roadmaps for students</li>
-                <li>Provide dedicated academic support to visibly improve academic performance</li>
-                <li>Foster student confidence and cultivate long-term learning motivation</li>
-                <li>Maintain clear, effective communication with both students and parents</li>
-              </ul>
-            </div>
-            <div>
-              <p class="col-title">Core Skills Developed</p>
-              <div class="skill-chips">
-                <span>Communication</span>
-                <span>Presentation</span>
-                <span>Leadership</span>
-                <span>Patience</span>
-                <span>Time Management</span>
-                <span>Problem Solving</span>
+      <div class="edu-timeline">
+        <!-- FTU -->
+        <div class="edu-card reveal">
+          <div class="edu-icon">🎓</div>
+          <div class="edu-body">
+            <div class="edu-tag">2023 – Present</div>
+            <h3 class="edu-school">Foreign Trade University (FTU)</h3>
+            <p class="edu-degree">High-Quality Program · International Economics</p>
+            <div class="edu-courses">
+              <p class="courses-label">Relevant Coursework</p>
+              <div class="courses-grid">
+                <span>International Economics</span>
+                <span>International Trade</span>
+                <span>Corporate Finance</span>
+                <span>Financial Statement Analysis</span>
+                <span>Econometrics</span>
+                <span>Regional Economics</span>
+                <span>International Business</span>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- High school -->
+        <div class="edu-card reveal">
+          <div class="edu-icon">📚</div>
+          <div class="edu-body">
+            <div class="edu-tag">2020 – 2023</div>
+            <h3 class="edu-school">Bien Hoa High School for the Gifted</h3>
+            <p class="edu-degree">Specialized Mathematics Program</p>
+            <p class="edu-desc">
+              Actively participated in student organizations and environmental projects,
+              developing leadership and community engagement skills alongside academic excellence.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="skills">
-    <div class="section-inner">
-      <div class="section-label">05 — Skills</div>
-      <h2 class="section-title">Core Competencies</h2>
-      <div class="skills-grid">
+  <!-- ══════════════════════════════════
+       LEADERSHIP SECTION
+  ══════════════════════════════════ -->
+  <section id="leadership" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">Experience</p>
+        <h2 class="section-title reveal">Leadership & Activities</h2>
+      </div>
 
-        <div class="skill-category" id="sk1">
-          <div class="skill-cat-icon">💼</div>
-          <h3>Professional Skills</h3>
-          <div class="skill-bars">
-            <div class="skill-bar-item"><span>Communication & PR</span><div class="bar"><div class="bar-fill" data-pct="92"></div></div></div>
-            <div class="skill-bar-item"><span>Negotiation</span><div class="bar"><div class="bar-fill" data-pct="85"></div></div></div>
-            <div class="skill-bar-item"><span>Leadership</span><div class="bar"><div class="bar-fill" data-pct="90"></div></div></div>
-            <div class="skill-bar-item"><span>Teamwork</span><div class="bar"><div class="bar-fill" data-pct="95"></div></div></div>
-            <div class="skill-bar-item"><span>Event Management</span><div class="bar"><div class="bar-fill" data-pct="88"></div></div></div>
-            <div class="skill-bar-item"><span>Time Management</span><div class="bar"><div class="bar-fill" data-pct="87"></div></div></div>
+      <!-- UNIVERSITY -->
+      <h3 class="sub-heading reveal">University</h3>
+      <div class="cards-grid">
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">🌐</span>
+            <span class="exp-date">2025 – Present</span>
+          </div>
+          <h4>Vice Head of External Relations</h4>
+          <p class="exp-org">Global Economic Club (GEC) · FTU</p>
+          <ul>
+            <li>Build & maintain relationships with sponsors and partners</li>
+            <li>Participate in sponsorship proposals & partnership negotiations</li>
+            <li>Support fundraising and event collaboration activities</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">🌐</span>
+            <span class="exp-date">2024 – 2025</span>
+          </div>
+          <h4>Member – External Relations</h4>
+          <p class="exp-org">Global Economic Club (GEC) · FTU</p>
+          <ul>
+            <li>Assisted in sponsor outreach & partnership development</li>
+            <li>Supported communications with external organizations</li>
+            <li>Contributed to event planning and implementation</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">👑</span>
+            <span class="exp-date">2023 – Present</span>
+          </div>
+          <h4>President of Student Association</h4>
+          <p class="exp-org">A06 – High-Quality Intl. Economics · FTU</p>
+          <ul>
+            <li>Lead student welfare & community-building activities</li>
+            <li>Coordinate volunteer and social initiatives</li>
+            <li>Strengthen student participation and collaboration</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">📋</span>
+            <span class="exp-date">2023 – Present</span>
+          </div>
+          <h4>Vice Secretary of Class Youth Union</h4>
+          <p class="exp-org">A06 – High-Quality Intl. Economics · FTU</p>
+          <ul>
+            <li>Coordinate class activities and student engagement programs</li>
+            <li>Support communication between students and faculty</li>
+            <li>Organize academic and extracurricular events</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- HIGH SCHOOL -->
+      <h3 class="sub-heading reveal" style="margin-top:3rem;">High School</h3>
+      <div class="cards-grid">
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">🌿</span>
+            <span class="exp-date">2023</span>
+          </div>
+          <h4>Vice President</h4>
+          <p class="exp-org">Environmental Leadership Club (ELC) · Bien Hoa High School</p>
+          <ul>
+            <li>Coordinated environmental awareness campaigns</li>
+            <li>Managed club projects and member activities</li>
+            <li>Organized school-wide environmental initiatives</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">♻️</span>
+            <span class="exp-date">2022</span>
+          </div>
+          <h4>Head of Action Department</h4>
+          <p class="exp-org">Environmental Leadership Club (ELC) · Bien Hoa High School</p>
+          <ul>
+            <li>Led volunteer activities and environmental projects</li>
+            <li>Coordinated campaign implementation and logistics</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">🤝</span>
+            <span class="exp-date">2022</span>
+          </div>
+          <h4>Logistics Department Member</h4>
+          <p class="exp-org">Volunteer Club · Bien Hoa High School</p>
+          <ul>
+            <li>Assisted in organizing charity events and fundraising</li>
+            <li>Managed logistics and event preparation</li>
+          </ul>
+        </div>
+
+        <div class="exp-card reveal">
+          <div class="exp-card-top">
+            <span class="exp-emoji">✏️</span>
+            <span class="exp-date">2022 – Present</span>
+          </div>
+          <h4>Private Tutor</h4>
+          <p class="exp-org">3+ Years Experience</p>
+          <ul>
+            <li>Develop personalized study plans for students</li>
+            <li>Strengthen students' confidence & learning motivation</li>
+            <li>Communicate effectively with students and parents</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SKILLS SECTION
+  ══════════════════════════════════ -->
+  <section id="skills" class="section alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">Capabilities</p>
+        <h2 class="section-title reveal">Skills</h2>
+      </div>
+
+      <div class="skills-wrapper">
+        <!-- Professional -->
+        <div class="skill-group reveal">
+          <div class="skill-group-header">
+            <span class="sg-icon">💼</span>
+            <h3>Professional Skills</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Communication</span>
+            <span>Public Relations</span>
+            <span>Negotiation</span>
+            <span>Leadership</span>
+            <span>Teamwork</span>
+            <span>Event Organization</span>
+            <span>Project Coordination</span>
+            <span>Time Management</span>
+            <span>Problem Solving</span>
           </div>
         </div>
 
-        <div class="skill-category" id="sk2">
-          <div class="skill-cat-icon">💻</div>
-          <h3>Technical Skills</h3>
-          <div class="skill-items-wrap">
-            <div class="skill-pill has-icon"><span class="pill-icon">📊</span>Microsoft Excel</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">📝</span>Microsoft Word</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">📽</span>PowerPoint</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">☁️</span>Google Workspace</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">🎨</span>Canva</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">🔍</span>Internet Research</div>
-            <div class="skill-pill has-icon"><span class="pill-icon">📈</span>Basic Data Analysis</div>
+        <!-- Technical -->
+        <div class="skill-group reveal">
+          <div class="skill-group-header">
+            <span class="sg-icon">💻</span>
+            <h3>Technical Skills</h3>
+          </div>
+          <div class="skill-tags">
+            <span>Microsoft Excel</span>
+            <span>Microsoft Word</span>
+            <span>Microsoft PowerPoint</span>
+            <span>Google Workspace</span>
+            <span>Canva</span>
+            <span>Internet Research</span>
+            <span>Data Collection</span>
+            <span>Basic Data Analysis</span>
           </div>
         </div>
 
-        <div class="skill-category" id="sk3">
-          <div class="skill-cat-icon">🌏</div>
-          <h3>Languages</h3>
-          <div class="lang-items">
+        <!-- Language -->
+        <div class="skill-group reveal">
+          <div class="skill-group-header">
+            <span class="sg-icon">🌏</span>
+            <h3>Language Skills</h3>
+          </div>
+          <div class="lang-bars">
             <div class="lang-item">
-              <div class="lang-flag">🇻🇳</div>
               <div class="lang-info">
-                <div class="lang-name">Vietnamese</div>
-                <div class="lang-level">Native</div>
-                <div class="lang-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></div>
+                <span>Vietnamese</span>
+                <span class="lang-level">Native</span>
               </div>
+              <div class="lang-bar"><div class="lang-fill" style="--w:100%"></div></div>
             </div>
             <div class="lang-item">
-              <div class="lang-flag">🇬🇧</div>
               <div class="lang-info">
-                <div class="lang-name">English</div>
-                <div class="lang-level">IELTS 7.0 – Proficient</div>
-                <div class="lang-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot half"></span></div>
+                <span>English</span>
+                <span class="lang-level">IELTS 7.0 · Advanced</span>
               </div>
+              <div class="lang-bar"><div class="lang-fill" style="--w:85%"></div></div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <section id="achievements" class="alt-bg">
-    <div class="section-inner">
-      <div class="section-label">06 — Achievements</div>
-      <h2 class="section-title">Key Highlights</h2>
-      <div class="achievements-list">
-        <div class="achievement-item" id="ach1">
+  <!-- ══════════════════════════════════
+       ACHIEVEMENTS SECTION
+  ══════════════════════════════════ -->
+  <section id="achievements" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">Milestones</p>
+        <h2 class="section-title reveal">Achievements</h2>
+      </div>
+
+      <div class="ach-grid">
+        <div class="ach-card reveal">
           <div class="ach-num">01</div>
-          <div class="ach-content">
-            <h3>IELTS Overall Band Score 7.0</h3>
-            <p>Demonstrated advanced English proficiency, thoroughly prepared for global corporate environments.</p>
-          </div>
+          <div class="ach-icon">🏆</div>
+          <h4>IELTS Band 7.0</h4>
+          <p>Overall band score demonstrating advanced English proficiency</p>
         </div>
-        <div class="achievement-item" id="ach2">
+        <div class="ach-card reveal">
           <div class="ach-num">02</div>
-          <div class="ach-content">
-            <h3>Vice Head of External Relations – GEC</h3>
-            <p>Assumed a core executive leadership role within FTU’s premier economic and corporate relations student club.</p>
-          </div>
+          <div class="ach-icon">🌐</div>
+          <h4>Vice Head, External Relations</h4>
+          <p>Global Economic Club (GEC), FTU – 2025</p>
         </div>
-        <div class="achievement-item" id="ach3">
+        <div class="ach-card reveal">
           <div class="ach-num">03</div>
-          <div class="ach-content">
-            <h3>Class Student Union President</h3>
-            <p>Led and fostered academic and social engagement for a high-quality international economics cohort.</p>
-          </div>
+          <div class="ach-icon">👑</div>
+          <h4>Class President</h4>
+          <p>Student Association – A06 High-Quality International Economics</p>
         </div>
-        <div class="achievement-item" id="ach4">
+        <div class="ach-card reveal">
           <div class="ach-num">04</div>
-          <div class="ach-content">
-            <h3>Vice President – Eco Leadership Club</h3>
-            <p>Drove significant campus-wide green campaigns and sustainability initiatives at Bien Hoa Gifted High School.</p>
-          </div>
+          <div class="ach-icon">📋</div>
+          <h4>Vice Secretary, Youth Union</h4>
+          <p>Class A06 – High-Quality International Economics Program</p>
         </div>
-        <div class="achievement-item" id="ach5">
+        <div class="ach-card reveal">
           <div class="ach-num">05</div>
-          <div class="ach-content">
-            <h3>3+ Years of Independent Tutoring</h3>
-            <p>Polished interpersonal, mentorship, and adaptive communication skills through extensive teaching experience.</p>
+          <div class="ach-icon">🌿</div>
+          <h4>Vice President, ELC</h4>
+          <p>Environmental Leadership Club, Bien Hoa High School for the Gifted</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-num">06</div>
+          <div class="ach-icon">✏️</div>
+          <h4>3+ Years Tutoring</h4>
+          <p>Personalized academic coaching with proven student success outcomes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CAREER OBJECTIVE BANNER
+  ══════════════════════════════════ -->
+  <section class="career-banner">
+    <div class="container">
+      <div class="banner-inner reveal">
+        <div class="banner-blob"></div>
+        <div class="banner-text">
+          <p class="section-eyebrow" style="color:#fff9;">Career Objective</p>
+          <h2>Open to Internship<br/> Opportunities</h2>
+          <p>
+            Aiming to build a career in <strong>business</strong>, <strong>finance</strong>,
+            <strong>international trade</strong>, or <strong>corporate relations</strong>.
+            Eager to apply communication, leadership, and analytical skills while growing professionally.
+          </p>
+          <a href="#contact" class="btn-white">Let's Connect →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CONTACT SECTION
+  ══════════════════════════════════ -->
+  <section id="contact" class="section alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow reveal">Reach Out</p>
+        <h2 class="section-title reveal">Contact Me</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="contact-item">
+            <div class="ci-icon">📧</div>
+            <div>
+              <p class="ci-label">Email</p>
+              <a href="mailto:nguyenthuhuong.19012005@gmail.com" class="ci-val">nguyenthuhuong.19012005@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">📞</div>
+            <div>
+              <p class="ci-label">Phone</p>
+              <a href="tel:0912302262" class="ci-val">0912 302 262</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">💼</div>
+            <div>
+              <p class="ci-label">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/h%C6%B0%C6%A1ng-nguy%E1%BB%85n-0a07001b5/" target="_blank" class="ci-val">View Profile →</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">📍</div>
+            <div>
+              <p class="ci-label">Location</p>
+              <p class="ci-val">Hanoi, Vietnam</p>
+            </div>
           </div>
         </div>
+
+        <form class="contact-form reveal" id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="e.g. Jane Smith" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="jane@company.com" required/>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" placeholder="Tell me about the opportunity…" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width" id="submitBtn">Send Message 🌸</button>
+          <p class="form-success" id="formSuccess">✓ Message sent! I'll get back to you soon 🌸</p>
+        </form>
       </div>
     </div>
   </section>
 
-  <section id="career">
-    <div class="section-inner">
-      <div class="section-label">07 — Objective</div>
-      <h2 class="section-title">Career Direction</h2>
-      <div class="career-card">
-        <div class="career-quote">"</div>
-        <p class="career-text">
-          As an International Economics student, I aim to build a robust professional path in <strong>business development, finance, international trade, or corporate relations</strong>. I look forward to securing an impactful internship where I can leverage my communication, leadership, and analytical strengths while continuously acquiring corporate expertise.
-        </p>
-        <div class="career-domains">
-          <span>🏦 Finance</span>
-          <span>🌐 International Trade</span>
-          <span>📊 Business</span>
-          <span>🤝 Corporate Relations</span>
-          <span>🌱 Sustainability</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="alt-bg">
-    <div class="section-inner">
-      <div class="section-label">08 — Contact</div>
-      <h2 class="section-title">Connect With Me</h2>
-      <p class="contact-intro">I am always open to internship opportunities, professional collaborations, and networking. Let's get in touch!</p>
-      <div class="contact-cards">
-        <a href="tel:0912302262" class="contact-card" id="cc-phone">
-          <div class="cc-icon">📞</div>
-          <div class="cc-label">Phone</div>
-          <div class="cc-value">0912 302 262</div>
-        </a>
-        <a href="mailto:nguyenthuhuong.19012005@gmail.com" class="contact-card" id="cc-email">
-          <div class="cc-icon">📧</div>
-          <div class="cc-label">Email</div>
-          <div class="cc-value">nguyenthuhuong.19012005@gmail.com</div>
-        </a>
-        <a href="https://www.linkedin.com/in/h%C6%B0%C6%A1ng-nguy%E1%BB%85n-0a07001b5/" target="_blank" rel="noopener" class="contact-card" id="cc-linkedin">
-          <div class="cc-icon">💼</div>
-          <div class="cc-label">LinkedIn</div>
-          <div class="cc-value">Nguyen Huong</div>
-        </a>
-        <div class="contact-card" id="cc-location">
-          <div class="cc-icon">📍</div>
-          <div class="cc-label">Location</div>
-          <div class="cc-value">Hanoi, Vietnam</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ── FOOTER ── -->
   <footer>
-    <p>© 2026 Nguyen Thu Huong · Made with ❤️ · FTU International Economics</p>
+    <div class="footer-inner">
+      <p class="footer-name">Nguyễn Thu Hương ✦ International Economics · FTU</p>
+      <p class="footer-copy">© 2025 · Crafted with passion & pink petals 🌸</p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
-<!-- BẮT ĐẦU HOA MẪU ĐƠN HỒNG ĐẬM -->
-<div id="peony-fixed-container">
-  <div class="peony-plant">
-    <div class="peony-flower">
-      <!-- Lớp ngoài -->
-      <div class="peony-petal outer petal-1"></div>
-      <div class="peony-petal outer petal-2"></div>
-      <div class="peony-petal outer petal-3"></div>
-      <div class="peony-petal outer petal-4"></div>
-      <!-- Lớp giữa -->
-      <div class="peony-petal middle petal-5"></div>
-      <div class="peony-petal middle petal-6"></div>
-      <div class="peony-petal middle petal-7"></div>
-      <!-- Lớp lõi -->
-      <div class="peony-petal center petal-8"></div>
-      <div class="peony-petal center petal-9"></div>
-    </div>
-    <div class="peony-stem"></div>
-  </div>
-</div>
-<!-- KẾT THÚC HOA MẪU ĐƠN -->
-<div id="mini-game-container">
-  <button id="open-game-btn" title="Góc Giải Trí">🎮</button>
-
-  <div id="game-modal" class="hidden">
-    <div class="game-content">
-      <button id="close-game-btn">&times;</button>
-      <h2 style="margin-bottom: 10px; color: #ff6b81; font-family: 'Playfair Display', serif;">Candy Crush Lite</h2>
-      <div style="margin-bottom: 15px; font-weight: bold; color: #333;">Score: <span id="game-score">0</span></div>
-      <div id="game-board"></div>
-      <p style="margin-top: 15px; font-size: 12px; color: #666;">Kéo thả kẹo để tạo hàng 3 nhé!</p>
-    </div>
-  </div>
-</div>
-
-<style>
-  /* Giao diện cho game */
-  #open-game-btn {
-    position: fixed; bottom: 30px; left: 30px;
-    background: #ff6b81; color: white; border: none;
-    border-radius: 50%; width: 55px; height: 55px;
-    font-size: 28px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
-    z-index: 1000; transition: transform 0.3s;
-  }
-  #open-game-btn:hover { transform: scale(1.1); }
-  #game-modal {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center;
-    z-index: 1001; opacity: 1; visibility: visible; transition: 0.3s ease;
-  }
-  #game-modal.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .game-content {
-    background: #fff; padding: 25px; border-radius: 20px;
-    text-align: center; position: relative; width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  }
-  #close-game-btn {
-    position: absolute; top: 15px; right: 20px; font-size: 28px;
-    background: none; border: none; cursor: pointer; color: #aaa; transition: color 0.2s;
-  }
-  #close-game-btn:hover { color: #ff6b81; }
-  #game-board {
-    width: 320px; height: 320px; background: #f0f0f0; border-radius: 10px;
-    display: flex; flex-wrap: wrap; margin: 0 auto; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-  }
-  #game-board div {
-    width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;
-    font-size: 26px; cursor: grab; user-select: none;
-  }
-  #game-board div:active { cursor: grabbing; }
-</style>
-
-<script>
-  // Logic xử lý Candy Crush (Match-3)
-  document.addEventListener('DOMContentLoaded', () => {
-    const openBtn = document.getElementById('open-game-btn');
-    const closeBtn = document.getElementById('close-game-btn');
-    const modal = document.getElementById('game-modal');
-    const grid = document.getElementById('game-board');
-    const scoreDisplay = document.getElementById('game-score');
-    const width = 8;
-    const squares = [];
-    let score = 0;
-    // Sử dụng emoji thay cho ảnh để web load nhanh, không cần up thêm file
-    const candies = ['🍬', '🍭', '🍫', '🍩', '🍪', '🧁'];
-
-    openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
-    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-
-    // Tạo bảng 8x8
-    function createBoard() {
-      for (let i = 0; i < width * width; i++) {
-        const square = document.createElement('div');
-        square.setAttribute('draggable', true);
-        square.setAttribute('id', i);
-        let randomCandy = Math.floor(Math.random() * candies.length);
-        square.innerHTML = candies[randomCandy];
-        grid.appendChild(square);
-        squares.push(square);
-      }
-    }
-    createBoard();
-
-    let colorBeingDragged, colorBeingReplaced, squareIdBeingDragged, squareIdBeingReplaced;
-
-    squares.forEach(square => square.addEventListener('dragstart', dragStart));
-    squares.forEach(square => square.addEventListener('dragend', dragEnd));
-    squares.forEach(square => square.addEventListener('dragover', dragOver));
-    squares.forEach(square => square.addEventListener('dragenter', dragEnter));
-    squares.forEach(square => square.addEventListener('dragleave', dragLeave));
-    squares.forEach(square => square.addEventListener('drop', dragDrop));
-
-    function dragStart() {
-      colorBeingDragged = this.innerHTML;
-      squareIdBeingDragged = parseInt(this.id);
-    }
-    function dragOver(e) { e.preventDefault(); }
-    function dragEnter(e) { e.preventDefault(); }
-    function dragLeave() {}
-    function dragDrop() {
-      colorBeingReplaced = this.innerHTML;
-      squareIdBeingReplaced = parseInt(this.id);
-      this.innerHTML = colorBeingDragged;
-      squares[squareIdBeingDragged].innerHTML = colorBeingReplaced;
-    }
-    function dragEnd() {
-      let validMoves = [
-        squareIdBeingDragged - 1, squareIdBeingDragged - width,
-        squareIdBeingDragged + 1, squareIdBeingDragged + width
-      ];
-      let validMove = validMoves.includes(squareIdBeingReplaced);
-      
-      if (squareIdBeingReplaced && validMove) {
-        squareIdBeingReplaced = null;
-      } else if (squareIdBeingReplaced && !validMove) {
-        squares[squareIdBeingReplaced].innerHTML = colorBeingReplaced;
-        squares[squareIdBeingDragged].innerHTML = colorBeingDragged;
-      } else {
-        squares[squareIdBeingDragged].innerHTML = colorBeingDragged;
-      }
-    }
-
-    // Làm kẹo rơi xuống
-    function moveDown() {
-      for (let i = 0; i < 55; i++) {
-        if (squares[i + width].innerHTML === '') {
-          squares[i + width].innerHTML = squares[i].innerHTML;
-          squares[i].innerHTML = '';
-        }
-        const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
-        const isFirstRow = firstRow.includes(i);
-        if (isFirstRow && squares[i].innerHTML === '') {
-          let randomCandy = Math.floor(Math.random() * candies.length);
-          squares[i].innerHTML = candies[randomCandy];
-        }
-      }
-    }
-
-    // Kiểm tra hàng ngang
-    function checkRowForThree() {
-      for (let i = 0; i < 61; i++) {
-        let rowOfThree = [i, i+1, i+2];
-        let decidedColor = squares[i].innerHTML;
-        const isBlank = squares[i].innerHTML === '';
-        const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
-        if (notValid.includes(i)) continue;
-        if (rowOfThree.every(index => squares[index].innerHTML === decidedColor && !isBlank)) {
-          score += 3;
-          scoreDisplay.innerHTML = score;
-          rowOfThree.forEach(index => { squares[index].innerHTML = ''; });
-        }
-      }
-    }
-
-    // Kiểm tra hàng dọc
-    function checkColumnForThree() {
-      for (let i = 0; i < 47; i++) {
-        let columnOfThree = [i, i+width, i+width*2];
-        let decidedColor = squares[i].innerHTML;
-        const isBlank = squares[i].innerHTML === '';
-        if (columnOfThree.every(index => squares[index].innerHTML === decidedColor && !isBlank)) {
-          score += 3;
-          scoreDisplay.innerHTML = score;
-          columnOfThree.forEach(index => { squares[index].innerHTML = ''; });
-        }
-      }
-    }
-
-    // Vòng lặp game chạy liên tục 0.1s/lần
-    window.setInterval(function() {
-      checkRowForThree();
-      checkColumnForThree();
-      moveDown();
-    }, 100);
-  });
-</script>
+  <script src="app.js"></script>
 </body>
 </html>
