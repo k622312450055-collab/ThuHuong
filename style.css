@@ -660,54 +660,77 @@ footer strong { color: var(--pink-300); }
   .career-quote { font-size: 5rem; }
   section { padding: 4rem 1.2rem; }
 }
-// --- LOGIC HOA MẪU ĐƠN (PEONY) NỞ BUNG THEO SCROLL ---
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let scrollPercent = totalHeight > 0 ? scrollTop / totalHeight : 0;
+/* --- HOA MẪU ĐƠN HỒNG ĐẬM --- */
+#peony-fixed-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; 
+  width: 150px; 
+  height: 250px;
+  z-index: 998;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-    const map = (val, inMin, inMax, outMin, outMax) => {
-        if (val <= inMin) return outMin;
-        if (val >= inMax) return outMax;
-        return (val - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
-    };
+.peony-plant {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
 
-    // 1. Mọc thân cây (Cuộn 10% -> 40%)
-    const stemScale = map(scrollPercent, 0.1, 0.4, 0, 1);
-    const peonyStem = document.querySelector('.peony-stem');
-    if (peonyStem) peonyStem.style.transform = `translateX(-50%) scaleY(${stemScale})`;
+/* Thân cây */
+.peony-stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: bottom center;
+  width: 8px;
+  height: 120px;
+  background: linear-gradient(to top, #1b5e20, #4caf50); /* Xanh lá thẫm */
+  border-radius: 4px;
+}
 
-    // 2. Toàn bộ bông hoa to dần và bám sát thân cây (Cuộn 30% -> 60%)
-    const flowerScale = map(scrollPercent, 0.3, 0.6, 0, 1.2); // Tăng scale lên 1.2 cho hoa thật TO
-    const peonyFlower = document.querySelector('.peony-flower');
-    if (peonyFlower) {
-        const currentStemHeight = stemScale * 120;
-        const flowerY = 120 - currentStemHeight; 
-        peonyFlower.style.transform = `translateX(-50%) translateY(${flowerY}px) scale(${flowerScale})`;
-    }
+/* Khối nụ/hoa */
+.peony-flower {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%) scale(0);
+  transform-origin: center bottom;
+  z-index: 5;
+}
 
-    // 3. Hiệu ứng bung cánh - Xoay và giãn cách cánh hoa (Cuộn 50% -> 100%)
-    const bloomSpread = map(scrollPercent, 0.5, 1.0, 0.3, 1); // bung từ ngậm (0.3) ra nở rộ (1.0)
-    
-    // Khởi tạo góc xoay đa chiều cho từng cánh
-    const outerAngles = [0, 90, 180, 270];
-    const middleAngles = [45, 165, 285];
-    const centerAngles = [20, 110];
+/* Hình dáng cánh hoa (Múp míp) */
+.peony-petal {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; 
+  /* Hiệu ứng kính mờ và viền hắt sáng màu hồng phấn */
+  box-shadow: inset 4px 4px 12px rgba(255, 192, 203, 0.5), 3px 5px 10px rgba(0,0,0,0.25);
+  transition: transform 0.1s linear;
+  transform-origin: center center;
+}
 
-    // Cánh ngoài bung rộng ra ngoài
-    document.querySelectorAll('.peony-petal.outer').forEach((el, i) => {
-        const spreadX = map(scrollPercent, 0.5, 1.0, 0, 15); // Đẩy cánh ra xa tâm 15px
-        el.style.transform = `rotate(${outerAngles[i]}deg) scale(${bloomSpread}) translateX(${spreadX}px)`;
-    });
-
-    // Cánh giữa bung vừa
-    document.querySelectorAll('.peony-petal.middle').forEach((el, i) => {
-        const spreadX = map(scrollPercent, 0.5, 1.0, 0, 8); // Đẩy ra 8px
-        el.style.transform = `rotate(${middleAngles[i]}deg) scale(${bloomSpread}) translateX(${spreadX}px)`;
-    });
-
-    // Lõi xoay nhẹ
-    document.querySelectorAll('.peony-petal.center').forEach((el, i) => {
-        el.style.transform = `rotate(${centerAngles[i] + (scrollPercent * 90)}deg) scale(${bloomSpread})`;
-    });
-});
+/* Lớp cánh ngoài: Hồng đậm tươi (Deep Pink) */
+.peony-petal.outer {
+  width: 110px; height: 110px;
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.95), rgba(194, 24, 91, 0.85));
+  backdrop-filter: blur(2px);
+}
+/* Lớp cánh giữa: Hồng nhung (Crimson/Dark Pink) */
+.peony-petal.middle {
+  width: 85px; height: 85px;
+  background: linear-gradient(135deg, rgba(194, 24, 91, 0.95), rgba(136, 14, 79, 0.9));
+}
+/* Lớp lõi hoa: Đỏ mận / Tím thẫm tạo chiều sâu (Burgundy) */
+.peony-petal.center {
+  width: 55px; height: 55px;
+  background: linear-gradient(135deg, rgba(136, 14, 79, 1), rgba(74, 20, 140, 0.95));
+}
