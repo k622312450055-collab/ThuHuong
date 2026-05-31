@@ -363,67 +363,77 @@ if (roleEl) {
   roleEl.style.transition = 'opacity 1s ease 0.5s';
   setTimeout(() => { roleEl.style.opacity = '1'; }, 300);
 }
-// --- LOGIC ĐIỀU KHIỂN HOA TULIP 3D MỌC THEO DÒNG CUỘN ---
+/* --- HOA MẪU ĐƠN STYLE FRAMER --- */
+#peony-fixed-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px; /* Nằm ở góc trái, đối xứng với tu-líp */
+  width: 150px; 
+  height: 250px;
+  z-index: 998;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-window.addEventListener('scroll', () => {
-    // 1. Lấy độ cao đã cuộn hiện tại của trang
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+.peony-plant {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
 
-    // 2. Lấy tổng độ cao có thể cuộn của cả trang
-    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    
-    // 3. Tính phần trăm cuộn trang (từ 0.0 đến 1.0)
-    let scrollPercent = 0;
-    if (totalHeight > 0) {
-        scrollPercent = scrollTop / totalHeight;
-    }
+/* Thân cây */
+.peony-stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0); /* Ẩn lúc đầu */
+  transform-origin: bottom center;
+  width: 8px;
+  height: 120px;
+  background: linear-gradient(to top, #2e7d32, #66bb6a);
+  border-radius: 4px;
+}
 
-    // --- Hàm toán học (Linear Interpolation) ---
-    // Giúp "map" (chuyển đổi) phần trăm cuộn trang sang giá trị animation mong muốn.
-    const map = (val, inMin, inMax, outMin, outMax) => {
-        if (val <= inMin) return outMin;
-        if (val >= inMax) return outMax;
-        return (val - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
-    };
+/* Khối nụ/hoa */
+.peony-flower {
+  position: absolute;
+  bottom: 110px; /* Đỉnh thân cây */
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%) scale(0); /* Ẩn lúc đầu */
+  transform-origin: center bottom;
+  z-index: 5;
+}
 
-    // --- BẮT ĐẦU ANIMATION THEO GIAI ĐOẠN ---
+/* Định dạng chung cánh hoa (Cánh cong, mềm mại) */
+.peony-petal {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  /* Hình dáng cánh hoa tự nhiên hơi bất đối xứng */
+  border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; 
+  box-shadow: inset 5px 5px 15px rgba(255,255,255,0.4), 2px 5px 10px rgba(0,0,0,0.1);
+  transition: transform 0.1s linear;
+  transform-origin: center center;
+}
 
-    // Giai đoạn 1: MỌC THÂN CÂY (Từ 10% đến 40% trang)
-    // Thân cây mọc lên cao dần (scaleY từ 0 đến 1)
-    const stemScale = map(scrollPercent, 0.1, 0.4, 0, 1);
-    const stem = document.querySelector('.stem');
-    if (stem) {
-        stem.style.transform = `translateX(-50%) scaleY(${stemScale})`;
-    }
-
-    // Giai đoạn 2: NẢY LÁ MẬP MẠP (Từ 30% đến 60% trang)
-    // 2 Lá mập mạp (scale từ 0 đến 1) nhú lên và ngả ra 2 bên
-    const leafScale = map(scrollPercent, 0.3, 0.6, 0, 1);
-    const leftLeaf = document.querySelector('.leaf-left');
-    const rightLeaf = document.querySelector('.leaf-right');
-    if (leftLeaf && rightLeaf) {
-        leftLeaf.style.transform = `rotate(-40deg) scale(${leafScale})`;
-        rightLeaf.style.transform = `rotate(40deg) scale(${leafScale})`;
-    }
-
-    // Giai đoạn 3: NHÚ NỤ HOA (Từ 50% đến 75% trang)
-    // Đầu hoa to dần (scale từ 0 đến 1) và nhú lên từ đỉnh thân cây đang mọc
-    const flowerScale = map(scrollPercent, 0.5, 0.75, 0, 1);
-    const flowerHead = document.querySelector('.flower-head');
-    if (flowerHead) {
-        // Tính toán vị trí Y để nụ hoa luôn bám sát đỉnh của thân cây
-        const currentStemHeight = stemScale * 80; // Chiều cao thực tế của thân
-        const flowerY = 80 - currentStemHeight; // Đẩy nụ hoa lên đúng đỉnh
-        flowerHead.style.transform = `translateX(-50%) translateY(${flowerY}px) scale(${flowerScale})`;
-    }
-
-    // Giai đoạn 4: HOA NỞ RỘ (Từ 70% đến 100% trang)
-    // Cánh trái ngả sang trái, cánh phải ngả sang phải để lộ nụ ở giữa (nở rộ)
-    const bloomAngle = map(scrollPercent, 0.7, 1.0, 0, 35); // Góc nở tối đa 35 độ
-    const petalLeft = document.querySelector('.petal-left');
-    const petalRight = document.querySelector('.petal-right');
-    if (petalLeft && petalRight) {
-        petalLeft.style.transform = `rotate(${-bloomAngle}deg)`;
-        petalRight.style.transform = `rotate(${bloomAngle}deg)`;
-    }
-});
+/* Màu cánh ngoài cùng: Đỏ hồng - Hồng phấn */
+.peony-petal.outer {
+  width: 110px; height: 110px;
+  background: linear-gradient(135deg, rgba(255, 106, 136, 0.9), rgba(255, 153, 172, 0.8));
+  backdrop-filter: blur(2px);
+}
+/* Màu cánh giữa: Hồng đậm - Vàng cam (Tạo ánh sáng rực rỡ) */
+.peony-petal.middle {
+  width: 85px; height: 85px;
+  background: linear-gradient(135deg, rgba(250, 112, 154, 0.95), rgba(254, 225, 64, 0.85));
+}
+/* Màu lõi hoa: Đỏ san hô */
+.peony-petal.center {
+  width: 55px; height: 55px;
+  background: linear-gradient(135deg, rgba(248, 80, 50, 1), rgba(231, 56, 39, 0.9));
+}
