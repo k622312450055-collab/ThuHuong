@@ -660,133 +660,54 @@ footer strong { color: var(--pink-300); }
   .career-quote { font-size: 5rem; }
   section { padding: 4rem 1.2rem; }
 }
-/* --- CHẬU HOA TULIP 3D MÚP MÍP --- */
+// --- LOGIC HOA MẪU ĐƠN (PEONY) NỞ BUNG THEO SCROLL ---
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrollPercent = totalHeight > 0 ? scrollTop / totalHeight : 0;
 
-/* Vùng chứa cố định ở góc */
-#tulip-3d-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 100px; /* Kích thước vừa phải, không quá to */
-  height: 220px;
-  z-index: 999; /* Luôn nằm trên các thành phần khác */
-  pointer-events: none; /* Không che mất các nút bấm phía dưới nếu có */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
+    const map = (val, inMin, inMax, outMin, outMax) => {
+        if (val <= inMin) return outMin;
+        if (val >= inMax) return outMax;
+        return (val - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
+    };
 
-/* --- CHẬU ĐẤT NUNG 3D --- */
-.pot {
-  position: relative;
-  z-index: 10; /* Nằm đè lên cây */
-}
-/* Viền miệng chậu */
-.pot-lip {
-  width: 90px;
-  height: 18px;
-  border-radius: 8px;
-  background: linear-gradient(to right, #e4a27a, #c0784d, #9d5a34); /* Hiệu ứng ánh sáng đất nung */
-  box-shadow: 0 6px 10px rgba(0,0,0,0.25);
-  margin: 0 auto;
-}
-/* Thân chậu nón cụt lật ngược */
-.pot-body {
-  width: 72px;
-  height: 65px;
-  background: linear-gradient(to right, #d8895b, #b4683c, #8b4a26);
-  border-radius: 0 0 20px 20px;
-  margin: 0 auto;
-  box-shadow: inset -8px -8px 15px rgba(0,0,0,0.3); /* Đổ bóng bên trong tạo chiều sâu */
-}
+    // 1. Mọc thân cây (Cuộn 10% -> 40%)
+    const stemScale = map(scrollPercent, 0.1, 0.4, 0, 1);
+    const peonyStem = document.querySelector('.peony-stem');
+    if (peonyStem) peonyStem.style.transform = `translateX(-50%) scaleY(${stemScale})`;
 
-/* --- CÂY HOA (Phần mọc lên) --- */
-.plant-group {
-  position: absolute;
-  bottom: 70px; /* Bắt đầu mọc từ miệng chậu */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5; /* Nằm sau chậu */
-  width: 100%;
-  height: 160px;
-}
+    // 2. Toàn bộ bông hoa to dần và bám sát thân cây (Cuộn 30% -> 60%)
+    const flowerScale = map(scrollPercent, 0.3, 0.6, 0, 1.2); // Tăng scale lên 1.2 cho hoa thật TO
+    const peonyFlower = document.querySelector('.peony-flower');
+    if (peonyFlower) {
+        const currentStemHeight = stemScale * 120;
+        const flowerY = 120 - currentStemHeight; 
+        peonyFlower.style.transform = `translateX(-50%) translateY(${flowerY}px) scale(${flowerScale})`;
+    }
 
-/* Thân cây mập mạp 3D */
-.stem {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 90px;
-  background: linear-gradient(to right, #9bd54d, #72a829); /* Màu xanh 3D */
-  border-radius: 5px;
-}
+    // 3. Hiệu ứng bung cánh - Xoay và giãn cách cánh hoa (Cuộn 50% -> 100%)
+    const bloomSpread = map(scrollPercent, 0.5, 1.0, 0.3, 1); // bung từ ngậm (0.3) ra nở rộ (1.0)
+    
+    // Khởi tạo góc xoay đa chiều cho từng cánh
+    const outerAngles = [0, 90, 180, 270];
+    const middleAngles = [45, 165, 285];
+    const centerAngles = [20, 110];
 
-/* Lá cây 3D múp míp */
-.leaf {
-  position: absolute;
-  width: 35px;
-  height: 70px;
-  background: linear-gradient(to right, #8ccb3e, #629c21); /* Màu xanh lá mập */
-  box-shadow: inset 3px 3px 6px rgba(255,255,255,0.3); /* Ánh sáng mặt lá */
-  bottom: 15px;
-}
-.leaf-left {
-  left: -5px;
-  border-radius: 100% 0 100% 0; /* Bo góc tạo hình lá mập giống ảnh */
-  transform: rotate(-40deg);
-  transform-origin: bottom right;
-}
-.leaf-right {
-  right: -5px;
-  border-radius: 0 100% 0 100%;
-  transform: rotate(40deg);
-  transform-origin: bottom left;
-}
+    // Cánh ngoài bung rộng ra ngoài
+    document.querySelectorAll('.peony-petal.outer').forEach((el, i) => {
+        const spreadX = map(scrollPercent, 0.5, 1.0, 0, 15); // Đẩy cánh ra xa tâm 15px
+        el.style.transform = `rotate(${outerAngles[i]}deg) scale(${bloomSpread}) translateX(${spreadX}px)`;
+    });
 
-/* Nụ hoa / Bông hoa */
-.flower-head {
-  position: absolute;
-  bottom: 85px; /* Đỉnh của thân cây */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 65px;
-}
+    // Cánh giữa bung vừa
+    document.querySelectorAll('.peony-petal.middle').forEach((el, i) => {
+        const spreadX = map(scrollPercent, 0.5, 1.0, 0, 8); // Đẩy ra 8px
+        el.style.transform = `rotate(${middleAngles[i]}deg) scale(${bloomSpread}) translateX(${spreadX}px)`;
+    });
 
-/* Các cánh hoa tu-líp 3D múp míp */
-.petal {
-  position: absolute;
-  bottom: 0;
-  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%; /* Bo hình cánh hoa */
-  transform-origin: bottom center;
-}
-/* Cánh giữa (Cánh nụ bên trong) */
-.petal-center {
-  width: 38px;
-  height: 60px;
-  background: linear-gradient(to bottom, #ff7eb3, #e8397a); /* Màu hồng đậm 3D */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-/* Cánh ngoài bên trái */
-.petal-left {
-  width: 36px;
-  height: 65px;
-  background: linear-gradient(to right, #ff94c2, #f54a8f); /* Màu hồng tu-líp 3D múp */
-  left: 0;
-  box-shadow: inset -4px -4px 6px rgba(0,0,0,0.15); /* Đổ bóng tạo chiều sâu lớp */
-  z-index: 2;
-}
-/* Cánh ngoài bên phải */
-.petal-right {
-  width: 36px;
-  height: 65px;
-  background: linear-gradient(to left, #ff94c2, #f54a8f); /* Đối xứng */
-  right: 0;
-  box-shadow: inset 4px -4px 6px rgba(0,0,0,0.15); /* Đối xứng bóng */
-  z-index: 2;
-}
+    // Lõi xoay nhẹ
+    document.querySelectorAll('.peony-petal.center').forEach((el, i) => {
+        el.style.transform = `rotate(${centerAngles[i] + (scrollPercent * 90)}deg) scale(${bloomSpread})`;
+    });
+});
