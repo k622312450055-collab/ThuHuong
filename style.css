@@ -1232,7 +1232,8 @@ footer {
 .puzzle-piece {
   width: 100%;
   height: 100%;
-  background-image: url('photo.jpg'); /* Dùng chính ảnh của bạn */
+  /* Đã cập nhật thành ảnh hoa anh đào bạn tải lên */
+  background-image: url('0378ff0a99f81260e6cec67d59c71a30.jpg'); 
   background-size: 300px 300px; /* Bằng với kích thước board */
   cursor: pointer;
   transition: transform 0.1s;
