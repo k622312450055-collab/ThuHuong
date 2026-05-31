@@ -580,7 +580,22 @@
       </div>
     </div>
   </section>
+<div id="puzzle-widget">
+    <button id="open-puzzle-btn" title="Góc Giải Trí">🧩</button>
 
+    <div id="puzzle-modal" class="hidden">
+      <div class="puzzle-content">
+        <button id="close-puzzle-btn">&times;</button>
+        <h2 style="color: var(--pink-500); margin-bottom: 10px; font-family: 'Playfair Display', serif;">Xếp Hình Thư Giãn</h2>
+        <p style="font-size: 0.9rem; color: #555; margin-bottom: 20px;">Nhấn vào mảnh ghép nằm cạnh ô trống để di chuyển nhé!</p>
+        
+        <div id="puzzle-board"></div>
+        
+        <button id="shuffle-btn" class="btn-primary" style="margin-top: 20px; width: 100%; padding: 10px;">Trộn Lại Ảnh</button>
+        <p id="puzzle-win-msg" style="display: none; color: #7bba7b; font-weight: bold; margin-top: 15px;">🎉 Bạn ghép xuất sắc quá!</p>
+      </div>
+    </div>
+  </div>
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-inner">
