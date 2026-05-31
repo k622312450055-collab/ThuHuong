@@ -363,77 +363,50 @@ if (roleEl) {
   roleEl.style.transition = 'opacity 1s ease 0.5s';
   setTimeout(() => { roleEl.style.opacity = '1'; }, 300);
 }
-/* --- HOA MẪU ĐƠN STYLE FRAMER --- */
-#peony-fixed-container {
-  position: fixed;
-  bottom: 20px;
-  left: 20px; /* Nằm ở góc trái, đối xứng với tu-líp */
-  width: 150px; 
-  height: 250px;
-  z-index: 998;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
+// --- LOGIC HOA MẪU ĐƠN BUNG CÁNH THEO SCROLL ---
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrollPercent = totalHeight > 0 ? scrollTop / totalHeight : 0;
 
-.peony-plant {
-  position: relative;
-  width: 100%;
-  height: 200px;
-}
+    const map = (val, inMin, inMax, outMin, outMax) => {
+        if (val <= inMin) return outMin;
+        if (val >= inMax) return outMax;
+        return (val - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
+    };
 
-/* Thân cây */
-.peony-stem {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) scaleY(0); /* Ẩn lúc đầu */
-  transform-origin: bottom center;
-  width: 8px;
-  height: 120px;
-  background: linear-gradient(to top, #2e7d32, #66bb6a);
-  border-radius: 4px;
-}
+    // 1. Mọc thân
+    const stemScale = map(scrollPercent, 0.1, 0.4, 0, 1);
+    const peonyStem = document.querySelector('.peony-stem');
+    if (peonyStem) peonyStem.style.transform = `translateX(-50%) scaleY(${stemScale})`;
 
-/* Khối nụ/hoa */
-.peony-flower {
-  position: absolute;
-  bottom: 110px; /* Đỉnh thân cây */
-  left: 50%;
-  width: 120px;
-  height: 120px;
-  transform: translateX(-50%) scale(0); /* Ẩn lúc đầu */
-  transform-origin: center bottom;
-  z-index: 5;
-}
+    // 2. Cả khối hoa to dần
+    const flowerScale = map(scrollPercent, 0.3, 0.6, 0, 1.2); 
+    const peonyFlower = document.querySelector('.peony-flower');
+    if (peonyFlower) {
+        const currentStemHeight = stemScale * 120;
+        const flowerY = 120 - currentStemHeight; 
+        peonyFlower.style.transform = `translateX(-50%) translateY(${flowerY}px) scale(${flowerScale})`;
+    }
 
-/* Định dạng chung cánh hoa (Cánh cong, mềm mại) */
-.peony-petal {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  margin: auto;
-  /* Hình dáng cánh hoa tự nhiên hơi bất đối xứng */
-  border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; 
-  box-shadow: inset 5px 5px 15px rgba(255,255,255,0.4), 2px 5px 10px rgba(0,0,0,0.1);
-  transition: transform 0.1s linear;
-  transform-origin: center center;
-}
+    // 3. Xòe cánh hoa thành hình tròn múp míp
+    const bloomSpread = map(scrollPercent, 0.5, 1.0, 0.3, 1); 
+    
+    const outerAngles = [0, 90, 180, 270];
+    const middleAngles = [45, 165, 285];
+    const centerAngles = [20, 110];
 
-/* Màu cánh ngoài cùng: Đỏ hồng - Hồng phấn */
-.peony-petal.outer {
-  width: 110px; height: 110px;
-  background: linear-gradient(135deg, rgba(255, 106, 136, 0.9), rgba(255, 153, 172, 0.8));
-  backdrop-filter: blur(2px);
-}
-/* Màu cánh giữa: Hồng đậm - Vàng cam (Tạo ánh sáng rực rỡ) */
-.peony-petal.middle {
-  width: 85px; height: 85px;
-  background: linear-gradient(135deg, rgba(250, 112, 154, 0.95), rgba(254, 225, 64, 0.85));
-}
-/* Màu lõi hoa: Đỏ san hô */
-.peony-petal.center {
-  width: 55px; height: 55px;
-  background: linear-gradient(135deg, rgba(248, 80, 50, 1), rgba(231, 56, 39, 0.9));
-}
+    document.querySelectorAll('.peony-petal.outer').forEach((el, i) => {
+        const spreadX = map(scrollPercent, 0.5, 1.0, 0, 12); 
+        el.style.transform = `rotate(${outerAngles[i]}deg) scale(${bloomSpread}) translateX(${spreadX}px)`;
+    });
+
+    document.querySelectorAll('.peony-petal.middle').forEach((el, i) => {
+        const spreadX = map(scrollPercent, 0.5, 1.0, 0, 6); 
+        el.style.transform = `rotate(${middleAngles[i]}deg) scale(${bloomSpread}) translateX(${spreadX}px)`;
+    });
+
+    document.querySelectorAll('.peony-petal.center').forEach((el, i) => {
+        el.style.transform = `rotate(${centerAngles[i] + (scrollPercent * 60)}deg) scale(${bloomSpread})`;
+    });
+});
