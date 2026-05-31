@@ -261,7 +261,7 @@ class Butterfly {
 const PETAL_COUNT     = 55;
 const BUTTERFLY_COUNT = 8;
 
-const petals     = Array.from({ length: PETAL_COUNT },     () => new Petal());
+const petals     = Array.from({ length: PETAL_COUNT },      () => new Petal());
 const butterflies = Array.from({ length: BUTTERFLY_COUNT }, () => new Butterfly());
 
 /* ─────────────────────────────────────
@@ -276,7 +276,6 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
-
 
 /* ══════════════════════════════════════════
    NAVBAR SCROLL EFFECT
@@ -295,7 +294,6 @@ hamburger.addEventListener('click', () => {
 document.querySelectorAll('.mm-link').forEach(l => {
   l.addEventListener('click', () => mobileMenu.classList.remove('open'));
 });
-
 
 /* ══════════════════════════════════════════
    SCROLL REVEAL (Intersection Observer)
@@ -317,7 +315,6 @@ const revealObs = new IntersectionObserver((entries) => {
 
 revealElements.forEach(el => revealObs.observe(el));
 
-
 /* ══════════════════════════════════════════
    CONTACT FORM MOCK SUBMIT
 ══════════════════════════════════════════ */
@@ -334,7 +331,6 @@ function handleSubmit(e) {
     document.getElementById('contactForm').reset();
   }, 1200);
 }
-
 
 /* ══════════════════════════════════════════
    SMOOTH ACTIVE NAV LINK
@@ -355,3 +351,97 @@ const sectionObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObs.observe(s));
+
+/* ══════════════════════════════════════════
+   MINI GAME: SLIDING PUZZLE LOGIC
+══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const openPuzzleBtn = document.getElementById('open-puzzle-btn');
+  const closePuzzleBtn = document.getElementById('close-puzzle-btn');
+  const puzzleModal = document.getElementById('puzzle-modal');
+  const puzzleBoard = document.getElementById('puzzle-board');
+  const shuffleBtn = document.getElementById('shuffle-btn');
+  const winMsg = document.getElementById('puzzle-win-msg');
+
+  if (puzzleBoard) {
+    let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // Số 8 đại diện cho ô trống
+    const gridSize = 3;
+
+    // Hiển thị / Ẩn game
+    openPuzzleBtn.addEventListener('click', () => puzzleModal.classList.remove('hidden'));
+    closePuzzleBtn.addEventListener('click', () => puzzleModal.classList.add('hidden'));
+
+    // Render các mảnh ghép ra màn hình
+    function renderPuzzle() {
+      puzzleBoard.innerHTML = '';
+      tiles.forEach((tileValue, index) => {
+        const piece = document.createElement('div');
+        piece.classList.add('puzzle-piece');
+        
+        if (tileValue === 8) {
+          piece.classList.add('empty');
+        } else {
+          const row = Math.floor(tileValue / gridSize);
+          const col = tileValue % gridSize;
+          piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+        }
+
+        piece.addEventListener('click', () => movePiece(index));
+        puzzleBoard.appendChild(piece);
+      });
+      checkWin();
+    }
+
+    // Logic di chuyển
+    function movePiece(index) {
+      const emptyIndex = tiles.indexOf(8);
+      const row = Math.floor(index / gridSize);
+      const col = index % gridSize;
+      const emptyRow = Math.floor(emptyIndex / gridSize);
+      const emptyCol = emptyIndex % gridSize;
+
+      // Kiểm tra mảnh ghép có liền kề ô trống không
+      const isAdjacent = Math.abs(row - emptyRow) + Math.abs(col - emptyCol) === 1;
+
+      if (isAdjacent) {
+        // Đổi vị trí
+        [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+        renderPuzzle();
+      }
+    }
+
+    // Trộn ngẫu nhiên bàn cờ (chỉ dùng các bước đi hợp lệ)
+    function shufflePuzzle() {
+      winMsg.style.display = 'none';
+      for (let i = 0; i < 150; i++) {
+        const emptyIndex = tiles.indexOf(8);
+        const validMoves = [];
+        
+        const row = Math.floor(emptyIndex / gridSize);
+        const col = emptyIndex % gridSize;
+
+        if (row > 0) validMoves.push(emptyIndex - gridSize);
+        if (row < gridSize - 1) validMoves.push(emptyIndex + gridSize);
+        if (col > 0) validMoves.push(emptyIndex - 1);
+        if (col < gridSize - 1) validMoves.push(emptyIndex + 1);
+
+        const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+        [tiles[emptyIndex], tiles[randomMove]] = [tiles[randomMove], tiles[emptyIndex]];
+      }
+      renderPuzzle();
+    }
+
+    // Kiểm tra thắng cuộc
+    function checkWin() {
+      const isWin = tiles.every((val, index) => val === index);
+      if (isWin && winMsg.style.display !== 'none' && tiles.length > 0) {
+        winMsg.style.display = 'block';
+      }
+    }
+
+    shuffleBtn.addEventListener('click', shufflePuzzle);
+    
+    // Khởi tạo game
+    shufflePuzzle();
+  }
+});
