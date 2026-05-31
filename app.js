@@ -355,3 +355,107 @@ const sectionObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObs.observe(s));
+// Hiệu ứng cuộn trang (Intersection Observer)
+const revealElements = document.querySelectorAll('.reveal, .reveal-card');
+
+const revealCallback = (entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target); // Chỉ chạy 1 lần
+    }
+  });
+};
+
+const revealOptions = {
+  threshold: 0.15, // Chạy hiệu ứng khi phần tử hiện ra 15% trên màn hình
+  rootMargin: "0px 0px -50px 0px"
+};
+
+const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+revealElements.forEach(el => revealObserver.observe(el));
+// Hiệu ứng cánh hoa rơi (Petals Animation)
+const canvas = document.getElementById('animCanvas');
+const ctx = canvas.getContext('2d');
+
+let cw = window.innerWidth;
+let ch = document.getElementById('hero').offsetHeight; // Phủ kín khu vực Hero
+canvas.width = cw;
+canvas.height = ch;
+
+const petals = [];
+const numPetals = 35; // Số lượng cánh hoa
+
+for (let i = 0; i < numPetals; i++) {
+  petals.push({
+    x: Math.random() * cw,
+    y: Math.random() * ch,
+    size: Math.random() * 4 + 4, // Kích thước cánh hoa
+    speedY: Math.random() * 1.5 + 0.5, // Tốc độ rơi
+    speedX: Math.random() * 2 - 1, // Tốc độ bay ngang
+    rotation: Math.random() * 360,
+    spin: Math.random() * 3 - 1.5
+  });
+}
+
+function drawPetals() {
+  ctx.clearRect(0, 0, cw, ch);
+  ctx.fillStyle = 'rgba(255, 183, 197, 0.7)'; // Màu hồng nhạt cánh hoa
+
+  petals.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation * Math.PI / 180);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    p.y += p.speedY;
+    p.x += p.speedX;
+    p.rotation += p.spin;
+
+    // Nếu rớt khỏi màn hình thì quay lại trên cùng
+    if (p.y > ch) {
+      p.y = -10;
+      p.x = Math.random() * cw;
+    }
+  });
+  requestAnimationFrame(drawPetals);
+}
+
+drawPetals();
+
+// Cập nhật lại kích thước canvas khi resize trình duyệt
+window.addEventListener('resize', () => {
+  cw = window.innerWidth;
+  ch = document.getElementById('hero').offsetHeight;
+  canvas.width = cw;
+  canvas.height = ch;
+});
+// Hiệu ứng 3D Tilt cho Cards
+const cards = document.querySelectorAll('.exp-card, .edu-card, .ach-card, .stat-card');
+
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left; // Tọa độ X của chuột trong thẻ
+    const y = e.clientY - rect.top;  // Tọa độ Y của chuột trong thẻ
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Tính toán góc xoay (giới hạn góc tối đa để không bị lật ngược)
+    const rotateX = ((y - centerY) / centerY) * -10; // Đổi dấu để cảm giác tự nhiên
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    card.style.transition = 'none'; // Tắt transition để xoay mượt theo chuột
+  });
+
+  card.addEventListener('mouseleave', () => {
+    // Trả thẻ về vị trí ban đầu
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    card.style.transition = 'transform 0.5s ease';
+  });
+});
