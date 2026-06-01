@@ -445,3 +445,30 @@ document.addEventListener('DOMContentLoaded', () => {
     shufflePuzzle();
   }
 });
+/* ══════════════════════════════════════════
+     7. MOUSE BUBBLE TRAIL EFFECT
+  ══════════════════════════════════════════ */
+  document.addEventListener('mousemove', function(e) {
+    // Chỉ tạo bong bóng với xác suất 30% mỗi khi chuột di chuyển 
+    // (Giúp web không bị giật lag vì tạo quá nhiều thẻ div cùng lúc)
+    if (Math.random() > 0.3) return;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'mouse-bubble';
+    
+    // Kích thước ngẫu nhiên từ 6px đến 16px
+    const size = Math.random() * 10 + 6; 
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    
+    // Vị trí xuất hiện: Xung quanh con trỏ chuột một chút
+    bubble.style.left = (e.pageX + (Math.random() * 20 - 10)) + 'px';
+    bubble.style.top = (e.pageY + (Math.random() * 20 - 10)) + 'px';
+    
+    document.body.appendChild(bubble);
+    
+    // Tự động xóa bong bóng sau 1 giây (bằng thời gian animation CSS)
+    setTimeout(() => {
+      bubble.remove();
+    }, 1000);
+  });
